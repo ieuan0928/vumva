@@ -1,0 +1,192 @@
+﻿<client_communicator:ContentNotification
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:client_communicator="clr-namespace:BOMBS.Client.Communicator"
+        xmlns:ui_foundation="clr-namespace:BOMBS.UI.Foundation.Controls;assembly=BOMBS.UI.Foundation"
+        xmlns:communicator_server_controls="clr-namespace:BOMBS.Client.Communicator.Server.Controls"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="BOMBS.Client.Communicator.Server.Controls.ServerList"
+        Height="433.49" Width="538.223">
+    <client_communicator:ContentNotification.Resources>
+        <communicator_server_controls:ServerConfigurationStatusImageSourceConverter x:Key="ServerConfigurationStatusImageSourceConverter" />
+    </client_communicator:ContentNotification.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ui_foundation:MessageNotification Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
+            <ui_foundation:MessageNotification.MessageCollection>
+                <System:String>Select or Add New Server Connection Configuration.</System:String>
+                <System:String>Set Active Server Configuration as desired.</System:String>
+                <System:String>Test the Connection to retrieve the Server Information.</System:String>
+            </ui_foundation:MessageNotification.MessageCollection>
+        </ui_foundation:MessageNotification>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="215" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="7,0,7,15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border BorderThickness="0,0,0,1" Margin="0,0,0,7" >
+                    <Border.BorderBrush>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#19000000"/>
+                            <GradientStop Color="#00000000" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <TextBlock Margin="0,15,5,5" FontWeight="Bold" Text="Server Connections Configuration" />
+                </Border>
+                <ListView x:Name="registeredServersListView" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionChanged="registeredServersListView_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Margin="2" Source="{Binding Value.ServerConfigurationStatus, Converter={StaticResource ServerConfigurationStatusImageSourceConverter}}" Height="16" Width="16"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Server / IP Address" DisplayMemberBinding="{Binding Value.Address}" />
+                            <GridViewColumn Header="Port" DisplayMemberBinding="{Binding Value.Port}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <HeaderedContentControl Margin="5,15,5,0" Grid.Row="0">
+                    <HeaderedContentControl.Header>
+                        <Border BorderThickness="0,0,0,1" Margin="0,0,0,5" >
+                            <Border.BorderBrush>
+                                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                    <GradientStop Color="#19000000"/>
+                                    <GradientStop Color="#00000000" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <TextBlock Margin="0,0,0,5" FontWeight="Bold" Text="Server Connection Configuration" />
+                        </Border>
+                    </HeaderedContentControl.Header>
+                    <Grid Margin="10,0,5,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,4,5,0" Text="Server/IP Address" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,4,5,0" Text="Port" />
+                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,4,5,0" Text=":" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,4,5,0" Text=":" />
+                        <TextBlock Grid.Row="0" Grid.Column="2" Margin="0,4,5,0" Text="{Binding Value.Address, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" />
+                        <TextBlock Grid.Row="1" Grid.Column="2" Margin="0,4,5,0" Text="{Binding Value.Port, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" />
+                    </Grid>
+                </HeaderedContentControl>
+                <HeaderedContentControl Grid.Row="1" Margin="5,15,5,0">
+                    <HeaderedContentControl.Header>
+                        <Border BorderThickness="0,0,0,1" Margin="0,0,0,5" >
+                            <Border.BorderBrush>
+                                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                    <GradientStop Color="#19000000"/>
+                                    <GradientStop Color="#00000000" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <TextBlock Margin="0,0,0,5" FontWeight="Bold" Text="Server Information" />
+                        </Border>
+                    </HeaderedContentControl.Header>
+                    <Grid Margin="10,0,5,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,4,5,0" Text="Computer" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,4,5,0" Text="Full Computer Name" />
+                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,4,5,0" Text="Host" />
+                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,4,5,0" Text="Domain" />
+                        <TextBlock Grid.Row="4" Grid.Column="0" Margin="0,4,5,0" Text="IP Address" />
+                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,4,5,0" Text=":" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,4,5,0" Text=":" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,4,5,0" Text=":" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,4,5,0" Text=":" />
+                        <TextBlock Grid.Row="4" Grid.Column="1" Margin="0,4,5,0" Text=":" />
+                        <TextBlock x:Name="computerNameTextBlock" Grid.Row="0" Grid.Column="2" Margin="0,4,5,0" FontWeight="Bold" Text="{Binding Value.Information.ComputerName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock x:Name="fullComputerNameTextBlock" Grid.Row="1" Grid.Column="2" Margin="0,4,5,0" FontWeight="Bold" Text="{Binding Value.Information.FullComputerName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock x:Name="hostNameTextBlock" Grid.Row="2" Grid.Column="2" Margin="0,4,5,0" FontWeight="Bold" Text="{Binding Value.Information.HostName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock x:Name="domainNameTextBlock" Grid.Row="3" Grid.Column="2" Margin="0,4,5,0" FontWeight="Bold" Text="{Binding Value.Information.DomainName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock x:Name="ipAddressTextBlock" Grid.Row="4" Grid.Column="2" Margin="0,4,5,0" FontWeight="Bold" Text="{Binding Value.Information.IPAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </HeaderedContentControl>
+                <HeaderedContentControl Grid.Row="2" Margin="5,15,5,0">
+                    <HeaderedContentControl.Header>
+                        <Border BorderThickness="0,0,0,1" Margin="0,0,0,5" >
+                            <Border.BorderBrush>
+                                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                    <GradientStop Color="#19000000"/>
+                                    <GradientStop Color="#00000000" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <TextBlock Margin="0,0,0,5" FontWeight="Bold" Text="Server Connection Configuration Task Panel" />
+                        </Border>
+                    </HeaderedContentControl.Header>
+                    <Grid Margin="0,0,5,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Button x:Name="addNewServerConnectionConfigurationButton" Margin="0,2,0,0" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Left" Click="addNewServerConnectionConfigurationButton_Click">
+                            <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="10,2,5,2" Source="../../../Resources/server_add.png" Height="16" Width="16"/>
+                                <TextBlock Margin="0,2,5,2" Text="Add New Server Connection Configuration." Grid.Column="1" />
+                            </Grid>
+                        </Button>
+                        <Button x:Name="setToCurrentActiveServerConfigurationButton" Margin="0,2,0,0" Grid.Row="1" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Left" Click="setToCurrentActiveServerConfigurationButton_Click">
+                            <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="10,2,5,2" Source="../../../Resources/server_go.png" Height="16" Width="16"/>
+                                <TextBlock Margin="0,2,5,2" Text="Set to Current Active Server Configuration." Grid.Column="1" />
+                            </Grid>
+                        </Button>
+                        <Button x:Name="testConnectionToRetrieveOrReloadServerConfigurationButton" Margin="0,2,0,0" Grid.Row="2" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Left" Click="testConnectionToRetrieveOrReloadServerConfigurationButton_Click">
+                            <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="10,2,5,2" Source="/BOMBS.Client;component/Resources/server_connect.png" Height="16" Width="16"/>
+                                <TextBlock Margin="0,2,5,2" Text="Test Connection then Retrieve Server Information." Grid.Column="1" />
+                            </Grid>
+                        </Button>
+                    </Grid>
+                </HeaderedContentControl>
+            </Grid>
+        </Grid>
+    </Grid>
+</client_communicator:ContentNotification>

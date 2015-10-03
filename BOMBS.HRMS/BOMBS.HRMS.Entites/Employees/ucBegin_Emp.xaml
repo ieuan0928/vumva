@@ -1,0 +1,15 @@
+﻿<ui_foundation_controls:BaseControl x:Class="BOMBS.HRMS.Entites.Employees.ucBegin_Emp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:ui_foundation_controls="clr-namespace:BOMBS.UI.Foundation.Controls;assembly=BOMBS.UI.Foundation"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Width="809" Height="490" Background="#FFEDEDED">
+    <Grid>
+        <Label Content="Add Employee Wizard" Height="36" HorizontalAlignment="Left" Margin="22,12,0,0" x:Name="label1" VerticalAlignment="Top" FontSize="16" Foreground="#FF1A1AD7" />
+        <Label Content="This wizard will help you to add Employee for TigerGen Human Resource System." Height="28" HorizontalAlignment="Left" Margin="43,66,0,0" x:Name="label2" VerticalAlignment="Top" />
+        <Label Content="To continue, click Next." Height="28" HorizontalAlignment="Left" Margin="616,464,0,-2" x:Name="label3" VerticalAlignment="Top" />
+
+    </Grid>
+</ui_foundation_controls:BaseControl>

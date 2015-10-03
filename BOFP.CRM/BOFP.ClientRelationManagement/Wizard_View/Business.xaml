@@ -1,0 +1,29 @@
+﻿<my:BaseControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:my="clr-namespace:BOFP.ClientRelationManagement.Controls"
+             xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit" x:Class="BOFP.ClientRelationManagement.Wizard_View.Business"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Width="781" Height="503" Background="#FFE0E6EA">
+    <Grid>
+        <Label Content="Business Details..." HorizontalAlignment="Left" Margin="18,11,0,0" VerticalAlignment="Top" Foreground="#FF1A1AD7" FontSize="16"/>
+        <Label Content="To continue, click Next &gt;" HorizontalAlignment="Left" Margin="630,467.04,0,0" VerticalAlignment="Top"/>
+        <Label Content="Date Application:" HorizontalAlignment="Left" Margin="18,89,0,0" VerticalAlignment="Top"/>
+        <Label Content="Address:" HorizontalAlignment="Left" Margin="18,273.76,0,0" VerticalAlignment="Top"/>
+        <Label Content="Height of Building:" HorizontalAlignment="Left" Margin="18,125.92,0,0" VerticalAlignment="Top"/>
+        <Label Content="Floor Area:" HorizontalAlignment="Left" Margin="18,162.88,0,0" VerticalAlignment="Top"/>
+        <Label Content="Classification of Occupancy:" HorizontalAlignment="Left" Margin="18,199.84,0,0" VerticalAlignment="Top"/>
+        <Label Content="Business Name:" HorizontalAlignment="Left" Margin="18,237.8,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="128" Margin="190,279.76,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="565" Text="{Binding Path=Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="190,129.92,0,0" TextWrapping="Wrap" Text="{Binding Path=HeightofBuilding,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="565"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="190,166.88,0,0" TextWrapping="Wrap" Text="{Binding Path=FloorArea,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="565"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="190,203.84,0,0" TextWrapping="Wrap" Text="{Binding Path=ClassificationOccupancy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="565"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="190,240.8,0,0" TextWrapping="Wrap" Text="{Binding Path=BusinessName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="565"/>
+
+        <Custom:DatePicker HorizontalAlignment="Left" Margin="190,89,0,0" VerticalAlignment="Top" Width="216.64" Text="{Binding Path=DateApplication,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+        <GroupBox Header="Business Details" HorizontalAlignment="Left" Margin="10,66.04,0,0" VerticalAlignment="Top" Width="761" Height="396" Foreground="#FF1A1AD7"/>
+
+    </Grid>
+</my:BaseControl>

@@ -1,0 +1,167 @@
+﻿<client_communicator:ContentNotification
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:validation="clr-namespace:BOMBS.UI.Foundation.Controls.ValidationRule;assembly=BOMBS.UI.Foundation"
+        xmlns:ui_foundation="clr-namespace:BOMBS.UI.Foundation.Controls;assembly=BOMBS.UI.Foundation"
+        xmlns:client_communicator="clr-namespace:BOMBS.Client.Communicator"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        x:Class="BOMBS.Client.Communicator.Server.Controls.NewConnection"     
+        mc:Ignorable="d" MinHeight="300" MinWidth="300" Loaded="UserControl_Loaded" Height="375" Width="354">
+    <client_communicator:ContentNotification.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="/BOMBS.UI.Foundation;component/resources/Common.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </client_communicator:ContentNotification.Resources>
+    <Grid Name="layoutGrid" Grid.Row="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ui_foundation:MessageNotification Grid.Row="0" VerticalAlignment="Top" >
+            <ui_foundation:MessageNotification.MessageCollection>
+                <System:String>Enter Valid Server Connection Configuration.</System:String>
+                <System:String>Test the Connection to retrieve the Server Information.</System:String>
+            </ui_foundation:MessageNotification.MessageCollection>
+        </ui_foundation:MessageNotification>
+        <HeaderedContentControl Margin="5,5,0,5" Grid.Row="1">
+            <HeaderedContentControl.Header>
+                <Border BorderThickness="0,0,0,1" Margin="0,0,0,5" >
+                    <Border.BorderBrush>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#19000000"/>
+                            <GradientStop Color="#00000000" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <TextBlock Margin="0,0,0,5" FontWeight="Bold" Text="Server Connection Configuration" />
+                </Border>
+            </HeaderedContentControl.Header>
+            <Grid Margin="5, 12, 5, 5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,5,0,5" Text="Server/IP Address" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="5" Text=":" />
+                <TextBox x:Name="serverAddressTextBox" Grid.Row="0" Margin="0" Grid.Column="2">
+                    <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:RequiredRule RequiredRuleErrorMessage="Server/IP Address is required."  />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBlock Grid.Row="2" Grid.Column="0" Margin="5,5,0,5" Text="Port" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Margin="5" Text=":" />
+                <TextBox x:Name="portTextBox" Grid.Row="2" Grid.Column="2" VerticalContentAlignment="Center" MaxLength="5">
+                    <Binding Path="Port" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:WholeNumberRule MinimumValue="1" MaximumValue="65535" RequiredRuleErrorMessage="Port is required." />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+            </Grid>
+        </HeaderedContentControl>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="5" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="testConnectionButton" Grid.Column="1" Padding="9,3"  Content="Test Connection" Click="testConnectionButton_Click" IsEnabledChanged="testConnectionButton_IsEnabledChanged">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="IsEnabled" Value="false" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding (Validation.HasError), ElementName=serverAddressTextBox}" Value="false" />
+                                    <Condition Binding="{Binding (Validation.HasError), ElementName=portTextBox}" Value="false" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="true" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+        <StackPanel HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </StackPanel>
+        <Border Grid.Row="3" HorizontalAlignment="Stretch" Margin="0,14" BorderThickness="0,0.2" >
+            <Border.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#7F000000" Offset="0"/>
+                    <GradientStop Color="#7F6E6E6E" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+        </Border>
+        <HeaderedContentControl Grid.Row="4" Margin="5,0">
+            <HeaderedContentControl.Header>
+                <Border BorderThickness="0,0,0,1" Margin="0,0,0,5" >
+                    <Border.BorderBrush>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#19000000"/>
+                            <GradientStop Color="#00000000" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <TextBlock Margin="0,0,0,5" FontWeight="Bold" Text="Server Information" />
+                </Border>
+            </HeaderedContentControl.Header>
+            <Grid Margin="10,0,5,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,4,5,0" Text="Computer" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,4,5,0" Text="Full Computer Name" />
+                <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,4,5,0" Text="Host" />
+                <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,4,5,0" Text="Domain" />
+                <TextBlock Grid.Row="4" Grid.Column="0" Margin="0,4,5,0" Text="IP Address" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,4,5,0" Text=":" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,4,5,0" Text=":" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,4,5,0" Text=":" />
+                <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,4,5,0" Text=":" />
+                <TextBlock Grid.Row="4" Grid.Column="1" Margin="0,4,5,0" Text=":" />
+                <TextBlock x:Name="computerNameTextBlock" Grid.Row="0" Grid.Column="2" Margin="0,4,5,0" FontWeight="Bold" />
+                <TextBlock x:Name="fullComputerNameTextBlock" Grid.Row="1" Grid.Column="2" Margin="0,4,5,0" FontWeight="Bold" />
+                <TextBlock x:Name="hostNameTextBlock" Grid.Row="2" Grid.Column="2" Margin="0,4,5,0" FontWeight="Bold" />
+                <TextBlock x:Name="domainNameTextBlock" Grid.Row="3" Grid.Column="2" Margin="0,4,5,0" FontWeight="Bold" />
+                <TextBlock x:Name="ipAddressTextBlock" Grid.Row="4" Grid.Column="2" Margin="0,4,5,0" FontWeight="Bold" />
+            </Grid>
+        </HeaderedContentControl>
+    </Grid>
+</client_communicator:ContentNotification>
+    

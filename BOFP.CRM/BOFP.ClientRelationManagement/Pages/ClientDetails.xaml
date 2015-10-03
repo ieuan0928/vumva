@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="BOFP.ClientRelationManagement.Pages.ClientDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="508">
+    <UserControl.Resources>
+        <Style x:Key="FlatTextBlockButton" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,5,5,5" />
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.2" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="FlatImageButton" TargetType="Image">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Width" Value="16" />
+            <Setter Property="Height" Value="16" />
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.2" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="FlatButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Name="layoutRoot">
+                            <Border Name="OuterBorder">
+                                <Border Name="InnerBorder" />
+                            </Border>
+                            <ContentPresenter />
+                        </Grid>
+                        
+                        <!--<ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="InnerBorder" Property="Style">
+                                    <Setter.Value>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="BorderBrush" Value="#fff8fcfe" />
+                                            <Setter Property="BorderThickness" Value="1,1,1,1" />
+                                        </Style>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="OuterBorder" Property="Style">
+                                    <Setter.Value>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="BorderBrush" Value="#FF3C7FB1" />
+                                            <Setter Property="CornerRadius" Value="3" />
+                                            <Setter Property="BorderThickness" Value="1,1,1,1" />
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="#FFE9F6FD" Offset="0"/>
+                                                        <GradientStop Color="#FFAADAF6" Offset="1"/>
+                                                        <GradientStop Color="#FFBBE4FC" Offset="0.52"/>
+                                                        <GradientStop Color="#FFDAF0FC" Offset="0.48"/>
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>-->
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button Content="Add New Client" Style="{StaticResource FlatButton}" Grid.Row="0" x:Name="btnAddnewClient" Click="btnAddnewClient_Click" />
+                <Button Style="{StaticResource FlatButton}" IsEnabled="False" HorizontalContentAlignment="Left" Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/BOFP.ClientRelationManagement;component/Resources/user_suit.png" Style="{StaticResource FlatImageButton}" />
+                        <TextBlock Grid.Column="1" Text="Edit Client Properties" Style="{StaticResource FlatTextBlockButton}" />
+                    </Grid>
+                </Button>
+                <Button Style="{StaticResource FlatButton}" Grid.Row="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Style="{StaticResource FlatImageButton}" Grid.Column="0" Source="/BOFP.ClientRelationManagement;component/Resources/calendar_add.png" />
+                        <TextBlock Style="{StaticResource FlatTextBlockButton}" Grid.Column="1" Text="Schedule an Inspection" />
+                    </Grid>
+                </Button>
+                <Button Content="Add New Transaction" Focusable="False" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0" Grid.Row="3" />
+            </Grid>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="41,60,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FF3C7FB1">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFE9F6FD" Offset="0"/>
+                        <GradientStop Color="#FFAADAF6" Offset="1"/>
+                        <GradientStop Color="#FFBBE4FC" Offset="0.52"/>
+                        <GradientStop Color="#FFDAF0FC" Offset="0.48"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </Grid>
+        <ListView Grid.Row="1" />
+    </Grid>
+</UserControl>

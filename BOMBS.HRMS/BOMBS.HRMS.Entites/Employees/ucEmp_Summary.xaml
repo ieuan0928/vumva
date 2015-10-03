@@ -1,0 +1,49 @@
+﻿<ui_foundation_controls:BaseControl x:Class="BOMBS.HRMS.Entites.Employees.ucEmp_Summary"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:ui_foundation_controls="clr-namespace:BOMBS.UI.Foundation.Controls;assembly=BOMBS.UI.Foundation"
+             mc:Ignorable="d" d:DesignWidth="300" Width="809" Background="#FFEDEDED">
+    <ScrollViewer Margin="0,0,42,0">
+       
+        <StackPanel Width="779" >
+
+            <Label Content="Summary" Height="36" HorizontalAlignment="Left" Margin="22,12,0,0" x:Name="label1" VerticalAlignment="Top" FontSize="16" Foreground="#FF1A1AD7" />
+
+            <Label Content="First Name:" Width="75" RenderTransformOrigin="0.909,0.347" FontWeight="Bold" HorizontalAlignment="Left" Margin="57,0,0,0"/>
+            <Label Content="{Binding Path=FirstName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="149,-25,-13,0"/>
+            <Label Content="Middle Name:" Margin="40,12,637,0" FontWeight="Bold"/>
+            <Label Content="{Binding Path=MiddleName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="150,-26,-15,0"/>
+            <Label Content="Last Name:" FontWeight="Bold" Margin="58,7,637,0"/>
+            <Label Content="{Binding Path=LastName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="150,-26,-16,0"/>
+            <Label Content="Age:" FontWeight="Bold" Margin="95,10,637,0"/>
+            <Label Content="{Binding Path=Age,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="151,-24,-16,5"/>
+            <Label Content="Gender:" FontWeight="Bold" Margin="76,11,637,11"/>
+            <Label Content="{Binding Path=Gender,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="151,-32,-16,32"/>
+            <Label Content="Status:" FontWeight="Bold" Margin="84,-5,637,11"/>
+            <Label Content="{Binding Path=Status,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="151,-26,-16,24"/>
+            <Label Content="Address:" FontWeight="Bold" Margin="74,-5,637,11"/>
+            <Label Content="{Binding Path=Address,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="151,-29,-16,24"/>
+            <Label Content="Position:" FontWeight="Bold" Margin="74,-2,637,11"/>
+            <Label Content="{Binding Path=Position,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="151,-28,-16,24"/>
+            <Label Content="Department:" FontWeight="Bold" Margin="52,2,609,11"/>
+            <Label Content="{Binding Path=Department,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="151,-32,-16,24"/>
+            <Label Content="Contact Number:" FontWeight="Bold" Margin="28,3,623,11"/>
+            <Label Content="{Binding Path=ContactNumber,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="151,-31,-16,24"/>
+            <Label Content="Employee Status:" FontWeight="Bold" Margin="28,3,623,11"/>
+            <Label Content="{Binding Path=EmployeeStatus,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="151,-32,-16,24"/>
+            <Label Content="Date Hired:" FontWeight="Bold" Margin="61,0,623,11"/>
+            <Label Content="{Binding Path=DateHired,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="151,-33,-16,24"/>
+            <Label Content="System Date Added:" FontWeight="Bold" Margin="12,5,576,11"/>
+            <Label Content="{Binding Path=DateAdded,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="151,-33,-16,24"/>
+
+        </StackPanel>
+
+
+    </ScrollViewer>
+       
+
+
+
+</ui_foundation_controls:BaseControl>

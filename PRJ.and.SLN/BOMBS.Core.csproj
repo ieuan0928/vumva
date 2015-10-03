@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{53AE7F08-AD39-460B-A473-A779F0BAE01E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BOMBS.Core</RootNamespace>
+    <AssemblyName>BOMBS.Core</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>C:\Bombs.Bin\BOMBS\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Handlers\Failed.cs" />
+    <Compile Include="Common\IModelBase.cs" />
+    <Compile Include="Common\ModelBase.cs" />
+    <Compile Include="Common\Handlers\NewValue.cs" />
+    <Compile Include="Framework\AllowNullPropertyAttribute.cs" />
+    <Compile Include="Framework\BitPropertyAttribute.cs" />
+    <Compile Include="Framework\DataObjects\EntityData.cs" />
+    <Compile Include="Framework\DataObjects\IDataCommunicator.cs" />
+    <Compile Include="Framework\DescriptorAttribute.cs" />
+    <Compile Include="Framework\EntityTypes\AssemblyType.cs" />
+    <Compile Include="Framework\DateTimePropertyAttribute.cs" />
+    <Compile Include="Framework\CoreType.cs" />
+    <Compile Include="Framework\EntityTypes\EntityType.cs" />
+    <Compile Include="Framework\EntityTypes\ModulePrerequisiteType.cs" />
+    <Compile Include="Framework\EntityTypes\ModuleType.cs" />
+    <Compile Include="Framework\FeatureAttribute.cs" />
+    <Compile Include="Framework\EntityTypes\ManagedType.cs" />
+    <Compile Include="Framework\ForeignTypePropertyAttribute.cs" />
+    <Compile Include="Framework\IdPropertyAttribute.cs" />
+    <Compile Include="Framework\NumericPropertyAttribute.cs" />
+    <Compile Include="Framework\TableAttribute.cs" />
+    <Compile Include="Framework\TextPropertyAttribute.cs" />
+    <Compile Include="Framework\UniqueNamePropertyAttribute.cs" />
+    <Compile Include="Framework\VarcharPropertyAttribute.cs" />
+    <Compile Include="Framework\FieldPropertyAttribute.cs" />
+    <Compile Include="Framework\EntityAttribute.cs" />
+    <Compile Include="Helper\ApplicationResourceDirectory.cs" />
+    <Compile Include="Helper\SecureString.cs" />
+    <Compile Include="Log\LogSource.cs" />
+    <Compile Include="Log\Delegates.cs" />
+    <Compile Include="Log\ILogger.cs" />
+    <Compile Include="Log\LogController.cs" />
+    <Compile Include="Log\LogEventArgs.cs" />
+    <Compile Include="Log\Logger.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Common\Handlers\Result.cs" />
+    <Compile Include="Resources\Builder.cs" />
+    <Compile Include="Resources\Helper.cs" />
+    <Compile Include="Resources\Property.cs" />
+    <Compile Include="Serialization\XMLHelper.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

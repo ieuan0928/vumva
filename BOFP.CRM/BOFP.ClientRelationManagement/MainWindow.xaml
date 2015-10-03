@@ -1,0 +1,144 @@
+﻿<Window xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:page="clr-namespace:BOFP.ClientRelationManagement.Pages"
+        x:Class="BOFP.ClientRelationManagement.MainWindow"
+        Title="MainWindow" MinHeight="480" MinWidth="640" WindowState="Maximized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Bureau of Fire Protection" Grid.Row="0" FontWeight="Bold" Margin="5,0" FontSize="26" Foreground="#FFE21F26" />
+                <TextBlock Text="System Management for Occupancy Permit" Grid.Row="1" Margin="5,0" FontSize="28" Foreground="#FF2E318A"/>
+                <TextBlock Text="Davao City District" Grid.Row="2" Margin="5,0" FontWeight="Bold" FontSize="20" Foreground="#FF7E6927" />
+            </Grid>
+            <Image Grid.Column="1" Margin="0,5,5,5" Source="Resources/bfp.png" Height="96" Width="96" />
+            <Image Grid.Column="2" Margin="0,5,5,5" Source="Resources/DVO.jpg" Height="96" Width="96" />
+        </Grid>
+
+        <Border Grid.Row="1" Margin="0,5,0,0" BorderThickness="0,0.3" BorderBrush="#FFB6B6B6">
+            <Grid>
+                <ToolBar ToolBarTray.IsLocked="True" VerticalAlignment="Top" Loaded="ToolBar_Loaded" HorizontalAlignment="Stretch">
+                    <RadioButton Name="clientToolBarRadioButton" IsChecked="True" Margin="1" HorizontalAlignment="Stretch" Checked="ToolBarRadio_CheckedChanged" Unchecked="ToolBarRadio_CheckedChanged">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="Resources/user_suit.png" />
+                            <TextBlock Padding="5" Grid.Column="1" Text="Client" />
+                        </Grid>
+                    </RadioButton>
+                    <Separator />
+                    <RadioButton Name="transactionToolBarRadioButton" Margin="1" HorizontalAlignment="Stretch" Checked="ToolBarRadio_CheckedChanged" Unchecked="ToolBarRadio_CheckedChanged">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="Resources/book.png" />
+                            <TextBlock Padding="5" Grid.Column="1" Text="Transactions" />
+                        </Grid>
+                    </RadioButton>
+                </ToolBar>
+                <ToolBar ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded" HorizontalAlignment="Right">
+                    <xctk:DropDownButton>
+                        <xctk:DropDownButton.DropDownContent>
+                            <Grid Background="White" Margin="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button Focusable="False" Grid.Row="0" Margin="1" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}">
+                                    <Grid Margin="7,3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/database_gear.png" Grid.Column="0" />
+                                        <TextBlock Margin="5,0,0,0" Text="Database Connection Settings" Grid.Column="1" />
+                                    </Grid>
+                                </Button>
+                                <Button Focusable="False" Grid.Row="1" Margin="1" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}">
+                                    <Grid Margin="7,3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/drive_user.png" Grid.Column="0" />
+                                        <TextBlock Margin="5,0,0,0" Text="User Administration Roles" Grid.Column="1" />
+                                    </Grid>
+                                </Button>
+                                <Separator Grid.Row="2" Margin="15,2" />
+                                <Button Focusable="False" Grid.Row="3" Margin="1" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}">
+                                    <Grid Margin="7,3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/door_in.png" Grid.Column="0" />
+                                        <TextBlock Margin="5,0,0,0" Text="Sign Out" Grid.Column="1" />
+                                    </Grid>
+                                </Button>
+                                <Button Focusable="False" Grid.Row="4" Margin="1" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}">
+                                    <Grid Margin="7,3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/cross.png" Grid.Column="0" />
+                                        <TextBlock Margin="5,0,0,0" Text="Exit Application" Grid.Column="1" />
+                                    </Grid>
+                                </Button>
+
+                            </Grid>
+                        </xctk:DropDownButton.DropDownContent>
+
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0"  Source="Resources/cog.png" />
+                            <TextBlock Margin="5,0,0,0" Grid.Column="1" Text="Settings" />
+                        </Grid>
+                    </xctk:DropDownButton>
+                </ToolBar>
+            </Grid>
+        </Border>
+        <TabControl Name="mainTabControl" Background="{x:Null}" HorizontalAlignment="Stretch"  Grid.Row="2" VerticalAlignment="Stretch" BorderBrush="{x:Null}">
+            <TabControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                </Style>
+            </TabControl.ItemContainerStyle>
+            <TabItem Name="clientTabItem">
+                <page:ClientPage HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            </TabItem>
+            <TabItem Name="transactionsTabItem">
+                <Grid>
+                    <TextBlock Text="transaction kuno nyawa.." />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

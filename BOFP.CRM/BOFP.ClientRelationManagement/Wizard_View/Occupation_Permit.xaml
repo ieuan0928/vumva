@@ -1,0 +1,26 @@
+﻿<my:BaseControl x:Class="BOFP.ClientRelationManagement.Wizard_View.Occupation_Permit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:my="clr-namespace:BOFP.ClientRelationManagement.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Width="781" Height="503" Background="#FFE0E6EA">
+    <Grid>
+        <Label Content="Owner Details..." HorizontalAlignment="Left" Margin="18,11,0,0" VerticalAlignment="Top" Foreground="#FF1A1AD7" FontSize="16"/>
+        <Label Content="Please provide all the fields available. Thank you." HorizontalAlignment="Left" Margin="18,170.28,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtOwner_FirstName" Content="First Name:" HorizontalAlignment="Left" Margin="18,223,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtOwner_MidName" Content="Middle Name:" HorizontalAlignment="Left" Margin="18,253.96,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtOwner_LastName" Content="Last Name:" HorizontalAlignment="Left" Margin="18,284.92,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtOwnerFName" HorizontalAlignment="Left" Height="23" Margin="116,223,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="644" IsEnabled="False" Text="{Binding Path=FirstName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="txtOwnerMname" HorizontalAlignment="Left" Height="23" Margin="116,253.96,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="644" IsEnabled="False" Text="{Binding Path=MiddleName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox x:Name="txtOwnerLname" HorizontalAlignment="Left" Height="23" Margin="116,287.88,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="644" IsEnabled="False" Text="{Binding Path=LastName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+        <RadioButton x:Name="rbCreate" Content="Create New Owner" HorizontalAlignment="Left" Margin="63,62.24,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.778,-0.067" Click="rbCreate_Click" Checked="rbCreate_Checked" Unchecked="rbCreate_Unchecked"/>
+        <RadioButton x:Name="rbSelect" Content="Select From Existing" HorizontalAlignment="Left" Margin="63,82.2,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.778,-0.067" Checked="rbSelect_Checked" Unchecked="rbSelect_Unchecked"/>
+        <ComboBox x:Name="cmbExisting" HorizontalAlignment="Left" Margin="146.28,110,0,0" VerticalAlignment="Top" Width="207.52" IsEnabled="False"/>
+        <Label Content="Select Owner" HorizontalAlignment="Left" Margin="61.59,106,0,0" VerticalAlignment="Top"/>
+        <GroupBox Header="Owner Details" HorizontalAlignment="Left" Margin="10,147.32,0,0" VerticalAlignment="Top" Width="761" Height="232.96" IsHitTestVisible="True" Foreground="#FF1A1AD7"/>
+        <Label Content="To continue, click Next &gt;" HorizontalAlignment="Left" Margin="630,467.04,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</my:BaseControl>

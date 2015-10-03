@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="BOMBS.UI.Foundation.Controls.DialogButtons"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="42" >
+    <Grid>
+        <StackPanel>
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#CCCDCDCD"/>
+                    <GradientStop Color="#CCDADADA" Offset="0.17"/>
+                    <GradientStop Color="#CCDCDCDC" Offset="0.34"/>
+                    <GradientStop Color="#CCD8D8D8" Offset="1"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <Grid Margin="5" Name="Container">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" Width="100" Height="30" Margin="5,0,0,0" Visibility="Collapsed" Name="btnYes" Content="Yes" Click="btnYes_Click"  />
+                <Button Grid.Column="2" Width="100" Height="30" Margin="5,0,0,0" Visibility="Collapsed" Name="btnNo" Content="No" Click="btnNo_Click"  />
+                <Button Grid.Column="3" Width="100" Height="30" Margin="5,0,0,0" Visibility="Visible" Name="btnOk" Content="Ok" Click="btnOk_Click"  />
+                <Button Grid.Column="4" Width="100" Height="30" Margin="5,0,0,0" Visibility="Visible" Name="btnCancel" Content="Cancel" Click="btnCancel_Click"  />
+                <Button Grid.Column="5" Width="100" Height="30" Margin="5,0,0,0" Visibility="Collapsed" Name="btnPrevious" Content="Previous" Click="btnPrevious_Click"  />
+                <Button Grid.Column="6" Width="100" Height="30" Margin="5,0,0,0" Visibility="Collapsed" Name="btnNext" Content="Next" Click="btnNext_Click"  />
+                <Button Grid.Column="7" Width="100" Height="30" Margin="5,0,0,0" Visibility="Collapsed" Name="btnCreate" Content="Create" Click="btnCreate_Click"  />
+                <Button Grid.Column="8" Width="100" Height="30" Margin="5,0,0,0" Visibility="Collapsed" Name="btnClose"  Content="Close" Click="btnClose_Click"  />
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

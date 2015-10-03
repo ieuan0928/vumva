@@ -1,0 +1,19 @@
+﻿<communicator:WindowNotification
+        x:Class="BOMBS.Client.Console.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:communicator ="clr-namespace:BOMBS.Client.Communicator;assembly=BOMBS.Client"
+        Title="Back Office Management Business System Client Console" Height="350" Width="525" ContentRendered="Window_ContentRendered" >
+    <Grid x:Name="layoutGrid">
+        <Button Content="Server List" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="172.436" Click="Button_Click"/>
+        <Button Content="Active Server Database" HorizontalAlignment="Left" Margin="10,57.435,0,0" VerticalAlignment="Top" Width="172.436" Click="Button_Click_1" />
+        <Button Content="Test Get Generic Data" HorizontalAlignment="Left" Margin="10,143.332,0,0" VerticalAlignment="Top" Width="172.436" Click="Button_Click_2" />
+        <ResizeGrip HorizontalAlignment="Left" Margin="228,195,0,0" VerticalAlignment="Top"/>
+
+        <Button Content="Close" HorizontalAlignment="Left" Margin="10,213.844,0,0" VerticalAlignment="Top" Width="172.436" Click="Button_Click_3" />
+
+        <Button Content="Restart Test" HorizontalAlignment="Left" Margin="10,259.998,0,0" VerticalAlignment="Top" Width="172.436" Click="Button_Click_4" />
+
+
+    </Grid>
+</communicator:WindowNotification>
