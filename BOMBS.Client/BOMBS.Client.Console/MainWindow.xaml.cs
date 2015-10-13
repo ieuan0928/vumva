@@ -91,12 +91,16 @@ namespace BOMBS.Client.Console
 
             BombsHost.DatabaseStatus DatabaseStatus = ServiceController.Communicator.ActiveServer.Information.DatabaseInformation.Status;
 
-            if (!isValidationDatabaseConfigurationFailed && DatabaseStatus != BombsHost.DatabaseStatus.ValidatingConfiguration && DatabaseStatus != BombsHost.DatabaseStatus.ConfigurationRequiresValidation) HideBusyMessage();
+            if (!isValidationDatabaseConfigurationFailed && DatabaseStatus != BombsHost.DatabaseStatus.ValidatingConfiguration &&
+                DatabaseStatus != BombsHost.DatabaseStatus.ConfigurationRequiresValidation &&
+                DatabaseStatus != BombsHost.DatabaseStatus.RequiresConfiguration) HideBusyMessage();
             else if ((DatabaseStatus == BombsHost.DatabaseStatus.ValidatingConfiguration || DatabaseStatus == BombsHost.DatabaseStatus.ConfigurationRequiresValidation) && !isValidationDatabaseConfigurationFailed)
                 ShowBusyMessage("Validation of Database Configuration is in progress.", "Validating Database Configuration");
             else if ((DatabaseStatus != BombsHost.DatabaseStatus.Ready && DatabaseStatus != BombsHost.DatabaseStatus.ConfigurationOnProgress) || isValidationDatabaseConfigurationFailed)
             {
-                HideBusyMessage();
+                if (DatabaseStatus != BombsHost.DatabaseStatus.RequiresConfiguration) HideBusyMessage();
+                else BusyMessageControl.BusyMessage = "Database Requires Configuration!";
+ 
                 Database.Dialogs.ViewServerDatabaseSettings();
             }
             else if (DatabaseStatus == BombsHost.DatabaseStatus.Ready) HideBusyMessage();
@@ -108,6 +112,7 @@ namespace BOMBS.Client.Console
             {
                 case ClientServer.ConnectionStatus.ResourceFileNotFound:
                     ClientServer.Dialogs.CreateNewConnection();
+                    ValidateDatabaseStatus();
                     break;
                 case ClientServer.ConnectionStatus.ConnectionFailure:
                     ClientServer.Dialogs.ViewRegisteredConnection();

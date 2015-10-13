@@ -33,7 +33,7 @@ namespace BOMBS.Client.Communicator
         {
             ServiceController.Communicator.ValidationDatabaseConfigurationFailed += Communicator_ValidationDatabaseConfigurationFailed;
         }
-        
+
         private void Communicator_ValidationDatabaseConfigurationFailed(object sender, EventArgs e)
         {
             isValidationDatabaseConfigurationFailed = true;
@@ -75,6 +75,10 @@ namespace BOMBS.Client.Communicator
         private ServiceController communicator;
         private BombsHost.DatabaseInformation previousDatabaseInformation;
         protected OverlappingBusyMessage overlappingBusyMessage = new OverlappingBusyMessage();
+        public OverlappingBusyMessage BusyMessageControl
+        {
+            get { return overlappingBusyMessage; }
+        }
 
         protected void ShowBusyMessage(string Message, string Title)
         {
