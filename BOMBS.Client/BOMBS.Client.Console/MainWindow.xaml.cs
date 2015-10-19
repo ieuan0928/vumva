@@ -105,7 +105,7 @@ namespace BOMBS.Client.Console
             }
             else if (DatabaseStatus == BombsHost.DatabaseStatus.Ready) HideBusyMessage();
         }
-
+         
         private void ValidateConnectionStatus(ClientServer.ConnectionStatus connectionStatus)
         {
             switch (connectionStatus)
