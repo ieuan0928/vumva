@@ -8,6 +8,7 @@ using System.ServiceProcess;
 using System.Text;
 
 using BOMBS.Core.Log;
+
 namespace BOMBS.ServiceServer
 {
     public partial class BombsService : ServiceBase
@@ -31,6 +32,7 @@ namespace BOMBS.ServiceServer
 
                 LogController.Instance.GetDefaultLogger().LogNow(this, "Starting BOMBS Service...", EventLogEntryType.Information);
                 BOMBS.Service.Controller.Communicator.Start();
+        
                 LogController.Instance.GetDefaultLogger().LogNow(this, "BOMBS Service Started Successfully...", EventLogEntryType.Information);
             }
             catch (Exception ex)
