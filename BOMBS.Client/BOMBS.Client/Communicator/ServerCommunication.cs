@@ -64,7 +64,6 @@ namespace BOMBS.Client.Communicator
             return true;
         }
 
-
         #region NotImplemented
 
         public IAsyncResult BeginConnectDatabaseOnProgress(BombsHost.DatabaseInformation previousInformation, BombsHost.DatabaseStatus oldStatus, BombsHost.DatabaseStatus newStatus, AsyncCallback callback, object asyncState)
@@ -119,13 +118,5 @@ namespace BOMBS.Client.Communicator
 
         #endregion
 
-
-
-
-
-
-        
-
-        
     }
 }

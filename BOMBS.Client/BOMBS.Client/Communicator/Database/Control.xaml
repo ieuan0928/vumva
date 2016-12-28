@@ -219,7 +219,7 @@
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Content="SQL Server Instance" Margin="0,4,5,0"/>
                         <Label Grid.Row="0" Grid.Column="1" Content=":" Margin="0,4,5,0"/>
-                        <TextBox Name="sqlServerInstanceTextBox" Grid.Row="0" Grid.Column="2" Margin="0,4,0,0" Height="25.96" VerticalAlignment="Top"/>
+                        <TextBox Name="sqlServerInstanceTextBox" Grid.Row="0" Grid.Column="2" Margin="0,4,0,0" Height="25.96" VerticalAlignment="Top" Text="{Binding Path=ServerInstanceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <Label Grid.Row="1" Grid.Column="0" Content="SQL Server Port" Margin="0,4,5,0"/>
                         <Label Grid.Row="1" Grid.Column="1" Content=":" Margin="0,4,5,0"/>
                         <TextBox Name="sqlServerPortTextBox" Grid.Row="1" Grid.Column="2" Margin="0,4,0,0">

@@ -69,6 +69,7 @@ namespace BOMBS.Client.Communicator.Database
 
             DatabaseLoginSettingsUpdateTarget();
 
+            data.DatabaseAuthentication = BombsHost.DatabaseAuthentication.SQLServer;
         }
 
         private void useWindowsAuthentication()
@@ -83,6 +84,8 @@ namespace BOMBS.Client.Communicator.Database
             confirmPasswordBoxBinding.ParentBinding.ValidationRules.Clear();
 
             DatabaseLoginSettingsUpdateTarget();
+
+            data.DatabaseAuthentication = BombsHost.DatabaseAuthentication.Windows;
         }
 
         private void DatabaseLoginSettingsUpdateTarget()
