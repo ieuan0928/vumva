@@ -90,6 +90,10 @@
       <Project>{eb44171a-7282-412d-bc8f-4bb49bfd6560}</Project>
       <Name>BOMBS.UI.Foundation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\BOMBS\BOMBS.Core.Library\BOMBS.Core.Library.csproj">
+      <Project>{45402154-e4c1-4a61-8d52-16f47ad54117}</Project>
+      <Name>BOMBS.Core.Library</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\BOMBS\BOMBS.Core\BOMBS.Core.csproj">
       <Project>{53ae7f08-ad39-460b-a473-a779f0bae01e}</Project>
       <Name>BOMBS.Core</Name>

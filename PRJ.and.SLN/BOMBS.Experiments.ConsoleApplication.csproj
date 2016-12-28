@@ -56,6 +56,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BOMBS\BOMBS.Core\BOMBS.Core.csproj">
+      <Project>{53ae7f08-ad39-460b-a473-a779f0bae01e}</Project>
+      <Name>BOMBS.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BOMBS.Service\BOMBS.Service.csproj">
       <Project>{d2410092-c500-48b0-91a1-1ab499612082}</Project>
       <Name>BOMBS.Service</Name>

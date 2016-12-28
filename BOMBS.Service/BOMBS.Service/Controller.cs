@@ -142,7 +142,7 @@ namespace BOMBS.Service
                 throttle = new ServiceThrottlingBehavior()
                 {
                     MaxConcurrentCalls = int.MaxValue,
-                    MaxConcurrentSessions = int.MaxValue,
+                    MaxConcurrentSessions = int.MaxValue
                 };
                 host.Description.Behaviors.Add(throttle);
             }

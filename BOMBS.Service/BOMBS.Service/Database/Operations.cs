@@ -243,6 +243,7 @@ namespace BOMBS.Service.Database
         private ConfigurationSteps CheckInstance()
         {
             ConfigurationSteps result = ConfigurationSteps.CheckingInstance;
+
             using (SqlConnection connection = new SqlConnection(masterConnectionString))
             {
                 try

@@ -97,43 +97,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Service References\BombsHost\BOMBS.Client.BombsHost.DatabaseStatus.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\BombsHost\BOMBS.Client.BombsHost.ServerInformation.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\BombsHost\BOMBS.Service.Database11.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BombsHost\BOMBS.Service.Server11.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BombsHost\service1.wsdl" />
-    <None Include="Service References\BombsHost\service2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BombsHost\service3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\BombsHost\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BombsHost\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BombsHost\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BombsHost\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\BOMBS\BOMBS.Core\BOMBS.Core.csproj">
       <Project>{53ae7f08-ad39-460b-a473-a779f0bae01e}</Project>
       <Name>BOMBS.Core</Name>
@@ -183,6 +146,49 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\BombsHost\BOMBS.Client.BombsHost.DatabaseStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BombsHost\BOMBS.Client.BombsHost.ServerInformation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BombsHost\Communicator.wsdl" />
+    <None Include="Service References\BombsHost\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BombsHost\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BombsHost\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BombsHost\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BombsHost\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\BombsHost\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BombsHost\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BombsHost\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BombsHost\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BombsHost\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
