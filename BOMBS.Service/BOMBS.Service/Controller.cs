@@ -76,8 +76,10 @@ namespace BOMBS.Service
 
         public void CreateNewPorts(string[] args)
         {
-            foreach (string str in args)
+            IEnumerator enumerator = args.GetEnumerator();
+            while (enumerator.MoveNext())
             {
+                string str = (string)enumerator.Current;
                 string[] arg = str.Split(':');
 
                 if (string.Compare(arg[0], "tcp", true) == 0) portTcp = Convert.ToInt16(arg[1]);

@@ -25,7 +25,7 @@ namespace BOMBS.Service.Framework
         internal bool ImportAssembly(Assembly assembly, string dbConnectionString)
         {
             bool result = false;
-            
+
             IEnumerable<Type> entityTypes = assembly.GetTypes().Where<Type>(itm => itm.GetCustomAttributes(typeof(CoreTypeAttribute), false).Length > 0);
 
             if (entityTypes.Count() > 0)
@@ -38,8 +38,10 @@ namespace BOMBS.Service.Framework
                     SqlCommand command = connection.CreateCommand();
                     command.Transaction = transaction;
 
-                    foreach (Type entity in entityTypes)
+                    IEnumerator<Type> enumerator = entityTypes.GetEnumerator();
+                    while (enumerator.MoveNext())
                     {
+                        Type entity = enumerator.Current;
                         QueryBuilders.CreateTableBuilder builder = new QueryBuilders.CreateTableBuilder(entity);
                         command.CommandText = builder.GenerateTSQLString();
                         command.ExecuteNonQuery();
@@ -61,7 +63,7 @@ namespace BOMBS.Service.Framework
 
         internal bool DiscoverAssembly(Assembly assembly, string dbConnectionString)
         {
-            bool result = false; 
+            bool result = false;
 
             IEnumerable<Type> entityTypes = assembly.GetTypes().Where(itm => itm.GetCustomAttributes(typeof(CoreTypeAttribute), false).Length > 0);
 

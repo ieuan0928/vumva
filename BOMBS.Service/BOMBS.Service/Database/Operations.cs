@@ -72,8 +72,10 @@ namespace BOMBS.Service.Database
                 if (OnDatabaseAvailable == null) return;
                 OnDatabaseAvailable(this, EventArgs.Empty);
 
-                foreach (KeyValuePair<string, ICommunicatorCallback> callback in communicator.ClientList)
+                Dictionary<string, ICommunicatorCallback>.Enumerator enumerator = communicator.ClientList.GetEnumerator();
+                while (enumerator.MoveNext())
                 {
+                    KeyValuePair<string, ICommunicatorCallback> callback = enumerator.Current;
                     BackgroundWorker validatingConfigurationSuccessfulWorker = new BackgroundWorker();
 
                     validatingConfigurationSuccessfulWorker.DoWork += validatingConfigurationSuccessfulWorker_DoWork;
@@ -84,8 +86,10 @@ namespace BOMBS.Service.Database
             }
             else
             {
-                foreach (KeyValuePair<string, ICommunicatorCallback> callback in communicator.ClientList)
+                Dictionary<string, ICommunicatorCallback>.Enumerator enumerator = communicator.ClientList.GetEnumerator();
+                while (enumerator.MoveNext())
                 {
+                    KeyValuePair<string, ICommunicatorCallback> callback = enumerator.Current;
                     BackgroundWorker validatingConfigurationFailedWorker = new BackgroundWorker();
 
                     validatingConfigurationFailedWorker.DoWork += validatingConfigurationFailedWorker_DoWork;
@@ -97,7 +101,7 @@ namespace BOMBS.Service.Database
 
             ((BackgroundWorker)sender).Dispose();
         }
-        
+
         private void validatingConfigurationSuccessfulWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             KeyValuePair<string, ICommunicatorCallback> callback = (KeyValuePair<string, ICommunicatorCallback>)e.Argument;
@@ -168,8 +172,10 @@ namespace BOMBS.Service.Database
 
             IEnumerable<KeyValuePair<string, ICommunicatorCallback>> callBackList = communicator.ClientList.Where(itm => itm.Key != communicator.CurrentSessionID);
 
-            foreach (KeyValuePair<string, ICommunicatorCallback> callback in callBackList)
+            IEnumerator<KeyValuePair<string, ICommunicatorCallback>> enumerator = callBackList.GetEnumerator();
+            while (enumerator.MoveNext())
             {
+                KeyValuePair<string, ICommunicatorCallback> callback = enumerator.Current;
                 connectionDatabaseCallbackWorkerList.Add(new BackgroundWorker());
                 BackgroundWorker bWorker = connectionDatabaseCallbackWorkerList[connectionDatabaseCallbackWorkerList.Count - 1];
 
@@ -196,8 +202,10 @@ namespace BOMBS.Service.Database
                 case ConfigurationSteps.ConfigurationCancel:
                     IEnumerable<KeyValuePair<string, ICommunicatorCallback>> callBackList = communicator.ClientList.Where(itm => itm.Key != databaseConnectionSessionID);
 
-                    foreach (KeyValuePair<string, ICommunicatorCallback> callBack in callBackList)
+                    IEnumerator<KeyValuePair<string, ICommunicatorCallback>> enumerator = callBackList.GetEnumerator();
+                    while (enumerator.MoveNext())
                     {
+                        KeyValuePair<string, ICommunicatorCallback> callBack = enumerator.Current;
                         BackgroundWorker callBackForConfigurationCancel = new BackgroundWorker();
 
                         callBackForConfigurationCancel.DoWork += callBackForConfigurationCancel_DoWork;
@@ -382,16 +390,19 @@ namespace BOMBS.Service.Database
             {
                 switch (configurationStep)
                 {
-                    case ConfigurationSteps.DatabaseNotAvailable: break;
+                    case ConfigurationSteps.DatabaseNotAvailable:
+                        break;
                     case ConfigurationSteps.DatabaseAvailable:
                         if (OnDatabaseAvailable != null) OnDatabaseAvailable(this, EventArgs.Empty);
                         break;
                     default:
                         callBackList = communicator.ClientList.Where(itm => itm.Key != databaseConnectionSessionID);
-
                         ConfigurationSteps stepToInform = configurationStep == ConfigurationSteps.InstanceFailure ? ConfigurationSteps.ConfigurationFailure : configurationStep;
-                        foreach (KeyValuePair<string, ICommunicatorCallback> callBack in callBackList)
+
+                        IEnumerator<KeyValuePair<string, ICommunicatorCallback>> enumerator = callBackList.GetEnumerator();
+                        while (enumerator.MoveNext())
                         {
+                            KeyValuePair<string, ICommunicatorCallback> callBack = enumerator.Current;
                             BackgroundWorker informOtherClientResult = new BackgroundWorker();
 
                             informOtherClientResult.DoWork += configureDatabaseWorker_DoWork;
@@ -411,9 +422,10 @@ namespace BOMBS.Service.Database
                 communicator.ClientList.Remove(databaseConnectionSessionID);
 
                 callBackList = communicator.ClientList.Where(itm => itm.Key != databaseConnectionSessionID);
-
-                foreach (KeyValuePair<string, ICommunicatorCallback> callBack in callBackList)
+                IEnumerator<KeyValuePair<string, ICommunicatorCallback>> enumerator = callBackList.GetEnumerator();
+                while (enumerator.MoveNext())
                 {
+                    KeyValuePair<string, ICommunicatorCallback> callBack = enumerator.Current;
                     List<object> argumentList = new List<object>();
                     Information dbInformation = communicator.ServerInformation.DatabaseInformation;
                     Status previousStatus = dbInformation.Status;

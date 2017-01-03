@@ -110,7 +110,12 @@ namespace BOMBS.Core.Resources
 
             ResourceWriter writer = new ResourceWriter(property.FullFilePath);
 
-            foreach (string key in properties.Keys) writer.AddResource(key, properties[key]);
+            Dictionary<string, string>.KeyCollection.Enumerator enumerator = properties.Keys.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                string key = enumerator.Current;
+                writer.AddResource(key, properties[key]);
+            }
 
             writer.Generate();
             writer.Close();

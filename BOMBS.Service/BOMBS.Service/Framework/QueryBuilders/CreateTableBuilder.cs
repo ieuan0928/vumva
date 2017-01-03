@@ -59,8 +59,10 @@ namespace BOMBS.Service.Framework.QueryBuilders
             string closeString = null;
             bodyString = string.Empty;
 
-            foreach (PropertyInfo propertyInfo in propertyInfoCollection)
+            var enumerator = propertyInfoCollection.GetEnumerator();
+            while (enumerator.MoveNext())
             {
+                var propertyInfo = enumerator.Current;
                 FieldPropertyAttribute fieldPropertyAttribute = propertyInfo.GetCustomAttributes(typeof(FieldPropertyAttribute), false)[0] as FieldPropertyAttribute;
 
                 if (fieldPropertyAttribute is BitPropertyAttribute) GenerateFieldNameAndAllowNull((AllowNullPropertyAttribute)fieldPropertyAttribute, "bit");
