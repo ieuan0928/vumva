@@ -32,7 +32,6 @@ namespace BOMBS.UI.Foundation
             listBox1.Items.Add(new ListBoxItem() { Content = _ItemCaption, Padding = new Thickness(20, 14, 20, 14) });
             ((UserControl)_Control).Visibility = System.Windows.Visibility.Collapsed;
             RightPanel.Children.Add((UserControl)_Control);
-            //_Control.DataModel = this.DataContext as UserInformation;
             ((BaseControl)_Control).NextEnabledChanged += BaseControl_NextEnabledChanged;
 
             controlList.Add(_ItemCaption, _Control);
@@ -52,8 +51,13 @@ namespace BOMBS.UI.Foundation
 
         public void HideControls(string excemptedKey)
         {
-            foreach (KeyValuePair<string, IControl> key in controlList)
-                if (key.Key != excemptedKey) ((UserControl)key.Value).Visibility = System.Windows.Visibility.Collapsed;
+            var enumerator = controlList.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                var key = enumerator.Current;
+                if (key.Key != excemptedKey)
+                    ((UserControl)key.Value).Visibility = Visibility.Collapsed;
+            }
         }
 
         private void listBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -86,8 +90,6 @@ namespace BOMBS.UI.Foundation
                 btnCancel.Visibility = Visibility.Hidden;
                 btnCreate.Visibility = Visibility.Hidden;
                 btnFinished.Visibility = Visibility.Visible;
-                
-           
         }
 
         private void btnFinished_Click(object sender, RoutedEventArgs e)

@@ -72,8 +72,12 @@ namespace BOMBS.Client.Communicator.Server
         {
             if (!rscBuilder.IsFileAvailable) return false;
 
-            foreach (string key in rscBuilder.Properties)
+            var enumerator = rscBuilder.Properties.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                var key = enumerator.Current;
                 this[key] = BSerialization.XMLHelper.DeserializeFromXMLString<ServerVariables>(rscBuilder[key]);
+            }
 
             return true;
         }
@@ -81,9 +85,11 @@ namespace BOMBS.Client.Communicator.Server
 
         public void WriteResources()
         {
-            foreach (string svar in keys)
+            var enumerator = keys.GetEnumerator();
+            while (enumerator.MoveNext())
             {
-                string result  = BSerialization.XMLHelper.SerializeToXMLString<ServerVariables>(this[svar]);
+                var svar = enumerator.Current;
+                string result = BSerialization.XMLHelper.SerializeToXMLString<ServerVariables>(this[svar]);
                 rscBuilder[svar] = result;
             }
 

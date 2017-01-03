@@ -381,7 +381,34 @@ namespace BOMBS.UI.Foundation
             {
                 Dialog.ButtonClickEventArgs eventArgs = new Dialog.ButtonClickEventArgs() { Button = sender, Type = ButtonType };
 
-                if (OnYesButtonClicked != null) OnYesButtonClicked(this, eventArgs);
+                switch (ButtonType)
+                {
+                    case Dialog.ButtonClickEventArgs.ButtonType.CancelButton:
+                        if (OnCancelButtonClicked != null) OnCancelButtonClicked(this, eventArgs);
+                        break;
+                    case Dialog.ButtonClickEventArgs.ButtonType.CloseButton:
+                        if (OnCloseButtonClicked != null) OnCloseButtonClicked(this, eventArgs);
+                        break;
+                    case Dialog.ButtonClickEventArgs.ButtonType.CreateButton:
+                        if (OnCreateButtonClicked != null) OnCreateButtonClicked(this, eventArgs);
+                        break;
+                    case Dialog.ButtonClickEventArgs.ButtonType.NextButton:
+                        if (OnNextButtonClicked != null) OnNextButtonClicked(this, eventArgs);
+                        break;
+                    case Dialog.ButtonClickEventArgs.ButtonType.NoButton:
+                        if (OnNoButtonClicked != null) OnNoButtonClicked(this, eventArgs);
+                        break;
+                    case Dialog.ButtonClickEventArgs.ButtonType.OkButton:
+                        if (OnOkButtonClicked != null) OnOkButtonClicked(this, eventArgs);
+                        break;
+                    case Dialog.ButtonClickEventArgs.ButtonType.PreviousButton:
+                        if (OnPreviousButtonClicked != null) OnPreviousButtonClicked(this, eventArgs);
+                        break;
+                    case Dialog.ButtonClickEventArgs.ButtonType.YesButton:
+                        if (OnYesButtonClicked != null) OnYesButtonClicked(this, eventArgs);
+                        break;
+                }
+                
                 if (OnDialogButtonClicked != null) OnDialogButtonClicked(this, eventArgs);
             }
 

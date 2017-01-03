@@ -12,7 +12,7 @@ using BOMBS.Core.Common.Handlers;
 using BResources = BOMBS.Core.Resources;
 using BSerialization = BOMBS.Core.Serialization;
 using System.ComponentModel;
-
+using System.Reflection;
 
 namespace BOMBS.Client.Communicator
 {
@@ -322,13 +322,17 @@ namespace BOMBS.Client.Communicator
 
         private void connector_GetServerInformationCompleted(object sender, BombsHost.GetServerInformationCompletedEventArgs e)
         {
-            if (activeServer.Information != e.Result)
+            try
             {
-                BombsHost.ServerInformation previousServerInformation = activeServer.Information;
-                activeServer.Information = e.Result;
-                WriteResources();
-                OnActiveServerInformationChanged(previousServerInformation, activeServer.Information);
+                if (activeServer.Information != e.Result)
+                {
+                    BombsHost.ServerInformation previousServerInformation = activeServer.Information;
+                    activeServer.Information = e.Result;
+                    WriteResources();
+                    OnActiveServerInformationChanged(previousServerInformation, activeServer.Information);
+                }
             }
+            catch (TargetInvocationException) { }
         }
 
         private void testCommunicator_GetServerInformationCompleted(object sender, BombsHost.GetServerInformationCompletedEventArgs e)

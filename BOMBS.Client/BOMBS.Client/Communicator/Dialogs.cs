@@ -17,7 +17,7 @@ namespace BOMBS.Client.Communicator
 
             public static bool CreateNewConnection(bool isShutDownWhenCancel = true)
             {
-                UIFoundation.Popup popup = new UIFoundation.Popup()
+                UIFoundation.Popup newConnectionPopup = new UIFoundation.Popup()
                     {
                         TitleImage = UIFoundation.Helper.GetResourceBitmapSource(@"BOMBS.Client;component/Resources/server_connect.png"),
                         Caption = "New Server Configuration",
@@ -27,11 +27,11 @@ namespace BOMBS.Client.Communicator
 
                 if (isShutDownWhenCancel)
                 {
-                    popup.Closing -= popup_Closing;
-                    popup.Closing += popup_Closing;
+                    newConnectionPopup.Closing -= NewConnectionPopup_Closing;
+                    newConnectionPopup.Closing += NewConnectionPopup_Closing;
                 }
 
-                WindowBase.DialogValue result = popup.ShowDialog();
+                WindowBase.DialogValue result = newConnectionPopup.ShowDialog();
                 switch (result)
                 {
                     case WindowBase.DialogValue.None:
@@ -43,7 +43,7 @@ namespace BOMBS.Client.Communicator
                     case WindowBase.DialogValue.Success:
                         ServiceController communicator = ServiceController.Communicator;
 
-                        Server.ServerVariables serverConfiguration = ((Server.Controls.NewConnection)popup.DialogContent).ServerConfiguration;
+                        Server.ServerVariables serverConfiguration = ((Server.Controls.NewConnection)newConnectionPopup.DialogContent).ServerConfiguration;
 
                         communicator.ActiveServer = serverConfiguration;
                         communicator.UseNewHost();
@@ -55,7 +55,7 @@ namespace BOMBS.Client.Communicator
                 return result == WindowBase.DialogValue.Success;
             }
 
-            private static void popup_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+            private static void NewConnectionPopup_Closing(object sender, System.ComponentModel.CancelEventArgs e)
             {
                 if (MessageBox.Show("There is no connection to the Server. \n\nThis action would Exit BOMBS. \n\nWould you like to continue?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                     e.Cancel = true;
@@ -102,7 +102,7 @@ namespace BOMBS.Client.Communicator
         {
             public static bool ViewServerDatabaseSettings()
             {
-                UIFoundation.Popup popup = new UIFoundation.Popup()
+                UIFoundation.Popup dbSettingsPopup = new UIFoundation.Popup()
                 {
                     TitleImage = UIFoundation.Helper.GetResourceBitmapSource(@"BOMBS.Client;component/Resources/server_connect.png"),
                     Caption = "Server Database Connection",
@@ -110,10 +110,26 @@ namespace BOMBS.Client.Communicator
                     TypeOfContent = typeof(Control)
                 };
 
-                popup.DialogButton.ButtonSet = UIFoundation.Controls.DialogButtons.DialogType.CloseOnly;
-                
-                return popup.ShowDialog() == WindowBase.DialogValue.Success;
+                dbSettingsPopup.DialogButton.ButtonSet = UIFoundation.Controls.DialogButtons.DialogType.CloseOnly;
+                dbSettingsPopup.Closing += DbSettingsPopup_Closing;
+                return dbSettingsPopup.ShowDialog() == WindowBase.DialogValue.Success;
             }
+
+            private static void DbSettingsPopup_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+            {
+                MessageBoxResult result = MessageBox.Show("Bombs service was unable to connect to the Database. \n\nWould you like to halt the Application?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        Application.Current.Shutdown();
+                        break;
+                    case MessageBoxResult.No:
+                        e.Cancel = true;
+                        break;
+                }
+            }   
+            
         }
     }
 }

@@ -46,7 +46,7 @@ namespace BOMBS.Client.Console
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            BOMBS.Client.Communicator.Database.Dialogs.ViewServerDatabaseSettings();
+            Database.Dialogs.ViewServerDatabaseSettings();
         }
 
         private void Window_ContentRendered(object sender, EventArgs e)
@@ -95,12 +95,15 @@ namespace BOMBS.Client.Console
                 DatabaseStatus != BombsHost.DatabaseStatus.ConfigurationRequiresValidation &&
                 DatabaseStatus != BombsHost.DatabaseStatus.RequiresConfiguration) HideBusyMessage();
             else if ((DatabaseStatus == BombsHost.DatabaseStatus.ValidatingConfiguration || DatabaseStatus == BombsHost.DatabaseStatus.ConfigurationRequiresValidation) && !isValidationDatabaseConfigurationFailed)
+            {
                 ShowBusyMessage("Validation of Database Configuration is in progress.", "Validating Database Configuration");
+                Database.Dialogs.ViewServerDatabaseSettings();
+            }
             else if ((DatabaseStatus != BombsHost.DatabaseStatus.Ready && DatabaseStatus != BombsHost.DatabaseStatus.ConfigurationOnProgress) || isValidationDatabaseConfigurationFailed)
             {
                 if (DatabaseStatus != BombsHost.DatabaseStatus.RequiresConfiguration) HideBusyMessage();
                 else BusyMessageControl.BusyMessage = "Database Requires Configuration!";
- 
+
                 Database.Dialogs.ViewServerDatabaseSettings();
             }
             else if (DatabaseStatus == BombsHost.DatabaseStatus.Ready) HideBusyMessage();

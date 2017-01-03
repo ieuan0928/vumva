@@ -51,8 +51,11 @@ namespace BOMBS.UI.Foundation.Utilities
 
                 elementCollection = controlToLock.Children;
                 int zIndex = 1;
-                foreach (UIElement element in elementCollection)
+
+                var enumerator = elementCollection.GetEnumerator();
+                while (enumerator.MoveNext())
                 {
+                    var element = (UIElement)enumerator.Current;
                     int elemZIndex = Panel.GetZIndex(element);
                     if (elemZIndex >= zIndex) zIndex = elemZIndex++;
 
@@ -86,17 +89,26 @@ namespace BOMBS.UI.Foundation.Utilities
         private void blurElementCollection(bool isBlur)
         {
 
-            foreach (UIElement element in elementCollection)
+            var enumerator = elementCollection.GetEnumerator();
+            
+            while (enumerator.MoveNext())
+            {
+                var element = (UIElement)enumerator.Current;
                 if (element != this)
                     if (isBlur)
                         element.Effect = new BlurEffect();
                     else element.Effect = null;
-
+            }
         }
 
         private void SetChildrenIsEnable(bool isEnable)
         {
-            foreach (UIElement element in elementList) element.IsEnabled = isEnable;
+            var enumerator = elementList.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                var element = enumerator.Current;
+                element.IsEnabled = isEnable;
+            }
         }
 
         public void Show()

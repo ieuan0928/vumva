@@ -123,4 +123,7 @@
   <data name="DatabaseStatus_DatabaseErrorConfiguration" xml:space="preserve">
     <value>Igit sa nyawa.</value>
   </data>
+  <data name="DatabaseStatus_ValidatingConfiguration" xml:space="preserve">
+    <value>Validating the Database Configuration.</value>
+  </data>
 </root>

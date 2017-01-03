@@ -196,7 +196,6 @@ namespace BOMBS.Client.Communicator.Database
             if (senderRadioButton == fillInServerOrIpAddressRadioButton) isSetServerOrIPaddress(false);
         }
 
-
         private void Communicator_ConfigureDatabaseStepsOnChanged(object sender, Core.Common.Handlers.ResultArg e)
         {
             Dispatcher.BeginInvoke(new Action(delegate()
@@ -221,7 +220,6 @@ namespace BOMBS.Client.Communicator.Database
                         {
                             communicator.PushDatabaseConfigurationCompleted += communicatorHideMessage_PushDatabaseConfigurationCompleted;
                             communicator.PushDatabaseConfigurationAsync(BombsHost.DatabaseConfigurationSteps.ConfigurationCancel);
-
                         }
                         break;
                 }

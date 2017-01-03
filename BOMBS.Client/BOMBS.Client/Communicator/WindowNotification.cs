@@ -108,12 +108,17 @@ namespace BOMBS.Client.Communicator
                             overlappingBusyMessage.BusyMessage = Properties.Resources.DatabaseStatus_ConfigurationOnProgress;
                             overlappingBusyMessage.Show();
                             break;
+                        case BombsHost.DatabaseStatus.ValidatingConfiguration:
+                            overlappingBusyMessage.BusyMessage = Properties.Resources.DatabaseStatus_ValidatingConfiguration;
+                            overlappingBusyMessage.Show();
+                            break;
                         case BombsHost.DatabaseStatus.DatabaseErrorConfiguration:
                             Application.Current.MainWindow.Activate();
                             overlappingBusyMessage.Hide();
                             MessageBox.Show(Properties.Resources.DatabaseStatus_DatabaseErrorConfiguration, "Error", MessageBoxButton.OK, MessageBoxImage.Information);
 
                             break;
+
 
                     }
                 }));

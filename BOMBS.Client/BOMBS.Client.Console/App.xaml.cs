@@ -17,6 +17,7 @@ namespace BOMBS.Client.Console
     public partial class App : Application
     {
         public BUtil.SplashScreen BSplashScreen { get; set; }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             BSplashScreen = new BUtil.SplashScreen();
