@@ -94,9 +94,11 @@ namespace BOMBS.Client.Console
             BombsHost.DatabaseStatus DatabaseStatus = serverInformation.DatabaseInformation.Status;
 
             if (!isValidationDatabaseConfigurationFailed && DatabaseStatus != BombsHost.DatabaseStatus.ValidatingConfiguration &&
-                DatabaseStatus != BombsHost.DatabaseStatus.ConfigurationRequiresValidation &&
-                DatabaseStatus != BombsHost.DatabaseStatus.RequiresConfiguration) HideBusyMessage();
-            else if ((DatabaseStatus == BombsHost.DatabaseStatus.ValidatingConfiguration || DatabaseStatus == BombsHost.DatabaseStatus.ConfigurationRequiresValidation) && !isValidationDatabaseConfigurationFailed)
+                    DatabaseStatus != BombsHost.DatabaseStatus.ConfigurationRequiresValidation &&
+                    DatabaseStatus != BombsHost.DatabaseStatus.RequiresConfiguration)
+                HideBusyMessage();
+            else if ((DatabaseStatus == BombsHost.DatabaseStatus.ValidatingConfiguration || DatabaseStatus == BombsHost.DatabaseStatus.ConfigurationRequiresValidation) 
+                    && !isValidationDatabaseConfigurationFailed)
             {
                 ShowBusyMessage("Validation of Database Configuration is in progress.", "Validating Database Configuration");
                 Database.Dialogs.ViewServerDatabaseSettings();
