@@ -88,8 +88,10 @@ namespace BOMBS.Client.Console
         {
             if (isDatabaseValidated) return;
             isDatabaseValidated = true;
+            BombsHost.ServerInformation serverInformation = ServiceController.Communicator.ActiveServer.Information;
+            if (serverInformation == null) return;
 
-            BombsHost.DatabaseStatus DatabaseStatus = ServiceController.Communicator.ActiveServer.Information.DatabaseInformation.Status;
+            BombsHost.DatabaseStatus DatabaseStatus = serverInformation.DatabaseInformation.Status;
 
             if (!isValidationDatabaseConfigurationFailed && DatabaseStatus != BombsHost.DatabaseStatus.ValidatingConfiguration &&
                 DatabaseStatus != BombsHost.DatabaseStatus.ConfigurationRequiresValidation &&
