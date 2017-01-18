@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 using BOMBS.UI.Foundation.Controls;
 using BOMBS.UI.Foundation.Controls.ValidationRule;
@@ -221,6 +212,10 @@ namespace BOMBS.Client.Communicator.Database
                             communicator.PushDatabaseConfigurationCompleted += communicatorHideMessage_PushDatabaseConfigurationCompleted;
                             communicator.PushDatabaseConfigurationAsync(BombsHost.DatabaseConfigurationSteps.ConfigurationCancel);
                         }
+                        break;
+                    case BombsHost.DatabaseConfigurationSteps.Completed:
+                        MessageBox.Show("Database Configuration has been created successfully.", "Database Configuration", MessageBoxButton.OK, MessageBoxImage.Information);
+                        HideBusyMessage();
                         break;
                 }
             }));
