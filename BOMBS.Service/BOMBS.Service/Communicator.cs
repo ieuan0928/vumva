@@ -88,7 +88,7 @@ namespace BOMBS.Service
 
         private void databaseOperations_OnDatabaseAvailable(object sender, EventArgs e)
         {
-
+            //var otherClientList = ClientList.Where(itm => itm.)
         }
 
         public void Disconnect()

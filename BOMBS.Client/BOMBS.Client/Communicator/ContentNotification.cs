@@ -58,6 +58,7 @@ namespace BOMBS.Client.Communicator
                             ShowBusyMessage(Properties.Resources.DatabaseStatus_ConfigurationOnProgress);
                             break;
                         case BombsHost.DatabaseStatus.DatabaseErrorConfiguration:
+                        case BombsHost.DatabaseStatus.Ready:
                             HideBusyMessage();
                             break;
                     }

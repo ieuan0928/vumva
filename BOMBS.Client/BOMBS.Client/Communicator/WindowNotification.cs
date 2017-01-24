@@ -18,7 +18,7 @@ namespace BOMBS.Client.Communicator
             communicator = ServiceController.Communicator;
 
             communicator.HostInitializedAndOpened += communicator_HostInitializedAndOpened;
-
+            
             if (communicator.Host != null) communicator.Host.GetServerInformationCompleted += CommunicatorHost_GetServerInformationCompleted;
 
             communicator.DatabaseStatusOnChanged += Communicator_DatabaseStatusOnChanged;
@@ -61,6 +61,10 @@ namespace BOMBS.Client.Communicator
                         Application.Current.MainWindow.Activate();
                         overlappingBusyMessage.Hide();
                         MessageBox.Show("Configuration of Database has been cancelled.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                        break;
+                    case BombsHost.DatabaseConfigurationSteps.DatabaseAvailable:
+                    case BombsHost.DatabaseConfigurationSteps.DatabaseCreated:
+                        overlappingBusyMessage.Hide();
                         break;
                 }
             }));
@@ -118,8 +122,10 @@ namespace BOMBS.Client.Communicator
                             MessageBox.Show(Properties.Resources.DatabaseStatus_DatabaseErrorConfiguration, "Error", MessageBoxButton.OK, MessageBoxImage.Information);
 
                             break;
-
-
+                        case BombsHost.DatabaseStatus.Ready:
+                            overlappingBusyMessage.Hide();
+                            break;
+                            
                     }
                 }));
             }
@@ -139,7 +145,7 @@ namespace BOMBS.Client.Communicator
 
         private void WindowNotification_Unloaded(object sender, RoutedEventArgs e)
         {
-            communicator.Host.GetServerInformationCompleted += CommunicatorHost_GetServerInformationCompleted;
+            communicator.Host.GetServerInformationCompleted -= CommunicatorHost_GetServerInformationCompleted;
             communicator.DatabaseStatusOnChanged -= Communicator_DatabaseStatusOnChanged;
         }
     }

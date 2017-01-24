@@ -351,7 +351,6 @@ namespace BOMBS.Service.Database
                     configurationStep = ConfigurationSteps.DatabaseAvailable;
                     communicator.ServerInformation.DatabaseInformation = submittedDatabaseConfiguration;
                     submittedDatabaseConfiguration.WriteResources();
-                    configurationStep = ConfigurationSteps.Completed;
                 }
                 else configurationStep = ConfigurationSteps.ImportCoreModuleFailed;
             }
