@@ -26,12 +26,13 @@ namespace BOMBS.Client.Communicator
 
         private void Communicator_ConfigureDatabaseStepsOnChanged(object sender, ResultArg e)
         {
-            Dispatcher.BeginInvoke(new Action(delegate()
+            Dispatcher.BeginInvoke(new Action(delegate ()
             {
                 switch ((BombsHost.DatabaseConfigurationSteps)e.Result)
                 {
                     case BombsHost.DatabaseConfigurationSteps.ConfigurationFailure:
                     case BombsHost.DatabaseConfigurationSteps.ConfigurationCancelled:
+                    case BombsHost.DatabaseConfigurationSteps.DatabaseAvailable:
                         HideBusyMessage();
                         break;
                 }
@@ -50,7 +51,7 @@ namespace BOMBS.Client.Communicator
             BombsHost.DatabaseStatus newValue = e.NewStatus;
             if (newValue != BombsHost.DatabaseStatus.Ready)
             {
-                Dispatcher.BeginInvoke(new Action(delegate()
+                Dispatcher.BeginInvoke(new Action(delegate ()
                 {
                     switch (newValue)
                     {
