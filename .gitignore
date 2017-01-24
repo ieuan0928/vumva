@@ -76,3 +76,4 @@ BOMBS/BOMBS.sln
 /BOMBS.Service/.vs/BOMBS.Service/v14
 /BOMBS.Client/BOMBS.Client/Properties
 /BOMBS.Client/.vs/BOMBS.Client/v14/.suo
+*.suo
