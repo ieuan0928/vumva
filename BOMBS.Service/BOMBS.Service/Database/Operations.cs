@@ -383,9 +383,33 @@ namespace BOMBS.Service.Database
             }
         }
 
-        private void communicateDatabaseCallBack_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void informOthers()
         {
             IEnumerable<KeyValuePair<string, ICommunicatorCallback>> callBackList = null;
+
+            callBackList = communicator.ClientList.Where(itm => itm.Key != databaseConnectionSessionID);
+            ConfigurationSteps stepToInform = configurationStep == ConfigurationSteps.InstanceFailure ? ConfigurationSteps.ConfigurationFailure : configurationStep;
+
+            IEnumerator<KeyValuePair<string, ICommunicatorCallback>> enumerator = callBackList.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                KeyValuePair<string, ICommunicatorCallback> callBack = enumerator.Current;
+                BackgroundWorker informOtherClientResult = new BackgroundWorker();
+
+                informOtherClientResult.DoWork += configureDatabaseWorker_DoWork;
+                informOtherClientResult.RunWorkerCompleted += configureDatabaseWorker_RunWorkerCompleted;
+
+                List<object> argumentList = new List<object>();
+                argumentList.Add(stepToInform);
+                argumentList.Add(callBack);
+
+                informOtherClientResult.RunWorkerAsync(argumentList);
+            }
+        }
+
+        private void communicateDatabaseCallBack_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            
             if ((bool)e.Result)
             {
                 switch (configurationStep)
@@ -393,34 +417,18 @@ namespace BOMBS.Service.Database
                     case ConfigurationSteps.DatabaseNotAvailable:
                         break;
                     case ConfigurationSteps.DatabaseAvailable:
+                        informOthers();
                         if (OnDatabaseAvailable != null) OnDatabaseAvailable(this, EventArgs.Empty);
                         break;
                     default:
-                        callBackList = communicator.ClientList.Where(itm => itm.Key != databaseConnectionSessionID);
-                        ConfigurationSteps stepToInform = configurationStep == ConfigurationSteps.InstanceFailure ? ConfigurationSteps.ConfigurationFailure : configurationStep;
-
-                        IEnumerator<KeyValuePair<string, ICommunicatorCallback>> enumerator = callBackList.GetEnumerator();
-                        while (enumerator.MoveNext())
-                        {
-                            KeyValuePair<string, ICommunicatorCallback> callBack = enumerator.Current;
-                            BackgroundWorker informOtherClientResult = new BackgroundWorker();
-
-                            informOtherClientResult.DoWork += configureDatabaseWorker_DoWork;
-                            informOtherClientResult.RunWorkerCompleted += configureDatabaseWorker_RunWorkerCompleted;
-
-                            List<object> argumentList = new List<object>();
-                            argumentList.Add(stepToInform);
-                            argumentList.Add(callBack);
-
-                            informOtherClientResult.RunWorkerAsync(argumentList);
-                        }
+                        informOthers();
                         break;
                 }
             }
             else
             {
                 communicator.ClientList.Remove(databaseConnectionSessionID);
-
+                IEnumerable<KeyValuePair<string, ICommunicatorCallback>> callBackList = null;
                 callBackList = communicator.ClientList.Where(itm => itm.Key != databaseConnectionSessionID);
                 IEnumerator<KeyValuePair<string, ICommunicatorCallback>> enumerator = callBackList.GetEnumerator();
                 while (enumerator.MoveNext())
