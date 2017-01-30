@@ -18,7 +18,7 @@ namespace BOMBS.Client.Communicator
             communicator = ServiceController.Communicator;
 
             communicator.HostInitializedAndOpened += communicator_HostInitializedAndOpened;
-            
+
             if (communicator.Host != null) communicator.Host.GetServerInformationCompleted += CommunicatorHost_GetServerInformationCompleted;
 
             communicator.DatabaseStatusOnChanged += Communicator_DatabaseStatusOnChanged;
@@ -48,7 +48,7 @@ namespace BOMBS.Client.Communicator
 
         private void communicator_ConfigureDatabaseStepsOnChanged(object sender, Core.Common.Handlers.ResultArg e)
         {
-            Dispatcher.BeginInvoke(new Action(delegate()
+            Dispatcher.BeginInvoke(new Action(delegate ()
             {
                 switch ((BombsHost.DatabaseConfigurationSteps)e.Result)
                 {
@@ -102,33 +102,30 @@ namespace BOMBS.Client.Communicator
 
         private void InvokeValidateDatabaseStatus(BombsHost.DatabaseStatus databaseStatus)
         {
-            if (databaseStatus != BombsHost.DatabaseStatus.Ready)
+            Dispatcher.BeginInvoke(new Action(delegate ()
             {
-                Dispatcher.BeginInvoke(new Action(delegate()
+                switch (databaseStatus)
                 {
-                    switch (databaseStatus)
-                    {
-                        case BombsHost.DatabaseStatus.ConfigurationOnProgress:
-                            overlappingBusyMessage.BusyMessage = Properties.Resources.DatabaseStatus_ConfigurationOnProgress;
-                            overlappingBusyMessage.Show();
-                            break;
-                        case BombsHost.DatabaseStatus.ValidatingConfiguration:
-                            overlappingBusyMessage.BusyMessage = Properties.Resources.DatabaseStatus_ValidatingConfiguration;
-                            overlappingBusyMessage.Show();
-                            break;
-                        case BombsHost.DatabaseStatus.DatabaseErrorConfiguration:
-                            Application.Current.MainWindow.Activate();
-                            overlappingBusyMessage.Hide();
-                            MessageBox.Show(Properties.Resources.DatabaseStatus_DatabaseErrorConfiguration, "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                    case BombsHost.DatabaseStatus.ConfigurationOnProgress:
+                        overlappingBusyMessage.BusyMessage = Properties.Resources.DatabaseStatus_ConfigurationOnProgress;
+                        overlappingBusyMessage.Show();
+                        break;
+                    case BombsHost.DatabaseStatus.ValidatingConfiguration:
+                        overlappingBusyMessage.BusyMessage = Properties.Resources.DatabaseStatus_ValidatingConfiguration;
+                        overlappingBusyMessage.Show();
+                        break;
+                    case BombsHost.DatabaseStatus.DatabaseErrorConfiguration:
+                        Application.Current.MainWindow.Activate();
+                        overlappingBusyMessage.Hide();
+                        MessageBox.Show(Properties.Resources.DatabaseStatus_DatabaseErrorConfiguration, "Error", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                            break;
-                        case BombsHost.DatabaseStatus.Ready:
-                            overlappingBusyMessage.Hide();
-                            break;
-                            
-                    }
-                }));
-            }
+                        break;
+                    case BombsHost.DatabaseStatus.Ready:
+                        overlappingBusyMessage.Hide();
+                        break;
+
+                }
+            }));
         }
 
         private void CommunicatorHost_GetServerInformationCompleted(object sender, BombsHost.GetServerInformationCompletedEventArgs e)
@@ -136,9 +133,9 @@ namespace BOMBS.Client.Communicator
             InvokeValidateDatabaseStatus(((BombsHost.ServerInformation)e.Result).DatabaseInformation.Status);
         }
 
-        private void Communicator_DatabaseStatusOnChanged(object sender, Database.ConnectdDatabaseOnProgressArguments e)
+        private void Communicator_DatabaseStatusOnChanged(object sender, Database.ConnectedDatabaseOnProgressArguments e)
         {
-            previousDatabaseInformation = e.PreviousDatabaseInformation;
+            previousDatabaseInformation = e.CurrentDatabaseInformation;
 
             InvokeValidateDatabaseStatus(e.NewStatus);
         }

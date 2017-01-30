@@ -24,6 +24,24 @@ namespace BOMBS.Client.Communicator.Database
             serverIpAddressTextBoxBinding = serverIpAddressTextBox.GetBindingExpression(TextBox.TextProperty);
 
             serverConfigurationGrid.DataContext = Communicator.ServiceController.Communicator.ActiveServer;
+
+            ServiceController.Communicator.DatabaseStatusOnChanged += Communicator_DatabaseStatusOnChanged;
+
+            Unloaded += Control_Unloaded;
+        }
+
+        private void Control_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ServiceController.Communicator.DatabaseStatusOnChanged -= Communicator_DatabaseStatusOnChanged;
+        }
+
+        private void Communicator_DatabaseStatusOnChanged(object sender, ConnectedDatabaseOnProgressArguments e)
+        {
+            if (e.NewStatus == BombsHost.DatabaseStatus.Ready)
+            {
+                data.Populate(e.CurrentDatabaseInformation);
+                HideBusyMessage();
+            }
         }
 
         private Database.Settings data = new Database.Settings();

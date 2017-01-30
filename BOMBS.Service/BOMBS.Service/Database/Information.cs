@@ -84,6 +84,17 @@ namespace BOMBS.Service.Database
             resourceBuilder.Save("Creating Database Configuration File.", "Database Configuration File has been created.");
         }
 
+        internal void Populate(Information targetObject)
+        {
+            targetObject.DatabaseAuthentication = this.DatabaseAuthentication;
+            targetObject.DatabaseName = this.DatabaseName;
+            targetObject.Password = this.Password;
+            targetObject.ServerAddress = this.ServerAddress;
+            targetObject.ServerInstanceName = this.ServerInstanceName;
+            targetObject.Status = this.status;
+            targetObject.UserName = this.UserName;
+        }
+
         private SQLServerOption sqlServerOption = SQLServerOption.UseLocalhost;
         [DataMember]
         public SQLServerOption SqlServerOption

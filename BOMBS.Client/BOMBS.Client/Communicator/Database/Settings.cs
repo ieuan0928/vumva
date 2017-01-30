@@ -197,6 +197,27 @@ namespace BOMBS.Client.Communicator
             {
                 if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+
+            public void Populate(BombsHost.DatabaseInformation sourceInfo)
+            {
+                if (string.IsNullOrEmpty(sourceInfo.Password))
+                {
+                    this.UseWindowsAuthentication = false;
+                }
+                else
+                {
+                    this.UseWindowsAuthentication = true;
+                    this.ConfirmPassword = sourceInfo.Password;
+                    this.Password = sourceInfo.Password;
+                }
+                this.DatabaseAuthentication = sourceInfo.DatabaseAuthentication;
+                this.DatabaseName = sourceInfo.DatabaseName;
+                this.DatabaseSQLServerOption = sourceInfo.SqlServerOption;
+                this.ServerAddress = sourceInfo.ServerAddress;
+                this.ServerInstanceName = sourceInfo.ServerInstanceName;
+                this.SqlServerPortString = sourceInfo.SQLServerPortString;
+                this.UserName = sourceInfo.UserName;
+            }
         }
     }
 }

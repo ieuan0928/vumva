@@ -16,7 +16,7 @@ namespace BOMBS.Service
         bool ValidatingDatabaseConfugationSuccessful();
 
         [OperationContract(IsOneWay = false)]
-        bool ConnectDatabaseOnProgress(Database.Information previousInformation, Database.Status oldStatus, Database.Status newStatus);
+        bool ConnectDatabaseOnProgress(Database.Information currentInformation, Database.Status oldStatus, Database.Status newStatus);
 
         [OperationContract(IsOneWay = false)]
         bool ConfigureDatabaseOnProgress(Database.ConfigurationSteps databaseConfiurationStep);

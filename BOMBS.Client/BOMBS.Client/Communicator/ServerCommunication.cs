@@ -35,9 +35,9 @@ namespace BOMBS.Client.Communicator
 
         public bool ConnectDatabaseOnProgress(BombsHost.DatabaseInformation previousInformation, BombsHost.DatabaseStatus oldStatus, BombsHost.DatabaseStatus newStatus)
         {
-            if (DatabaseStatusOnChanged != null) DatabaseStatusOnChanged(this, new ConnectdDatabaseOnProgressArguments()
+            if (DatabaseStatusOnChanged != null) DatabaseStatusOnChanged(this, new ConnectedDatabaseOnProgressArguments()
             {
-                PreviousDatabaseInformation = previousInformation,
+                CurrentDatabaseInformation = previousInformation,
                 OldStatus = oldStatus,
                 NewStatus = newStatus
             });

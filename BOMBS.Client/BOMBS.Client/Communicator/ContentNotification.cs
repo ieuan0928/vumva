@@ -44,9 +44,9 @@ namespace BOMBS.Client.Communicator
             parentWindow = Window.GetWindow(this);
         }
 
-        private void Communicator_DatabaseStatusOnChanged(object sender, Database.ConnectdDatabaseOnProgressArguments e)
+        private void Communicator_DatabaseStatusOnChanged(object sender, Database.ConnectedDatabaseOnProgressArguments e)
         {
-            previousDatabaseInformation = e.PreviousDatabaseInformation;
+            previousDatabaseInformation = e.CurrentDatabaseInformation;
 
             BombsHost.DatabaseStatus newValue = e.NewStatus;
             if (newValue != BombsHost.DatabaseStatus.Ready)
@@ -59,6 +59,8 @@ namespace BOMBS.Client.Communicator
                             ShowBusyMessage(Properties.Resources.DatabaseStatus_ConfigurationOnProgress);
                             break;
                         case BombsHost.DatabaseStatus.DatabaseErrorConfiguration:
+                            HideBusyMessage();
+                            break;
                         case BombsHost.DatabaseStatus.Ready:
                             HideBusyMessage();
                             break;

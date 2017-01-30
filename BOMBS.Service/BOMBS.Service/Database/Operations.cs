@@ -263,6 +263,7 @@ namespace BOMBS.Service.Database
                 catch
                 {
                     result = ConfigurationSteps.InstanceFailure;
+                    communicator.ServerInformation.DatabaseInformation.Status = Status.InvalidConfiguration;
                 }
             }
 
@@ -313,33 +314,33 @@ namespace BOMBS.Service.Database
 
         private void configureDatabaseConnectionWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            masterConnectionString = submittedDatabaseConfiguration.GenerateConnectionString(Information.ConnectionStringType.UseMaster);
+            emptyCatalogConnectionString = submittedDatabaseConfiguration.GenerateConnectionString(Information.ConnectionStringType.EmptyCatalog);
+            connectionString = submittedDatabaseConfiguration.GenerateConnectionString();
+
             if (configurationStep == ConfigurationSteps.Initializing)
             {
                 bool done = false;
                 while (!done) done = connectionDatabaseCallbackWorkerList.Count(itm => itm.IsBusy) == 0;
 
-                masterConnectionString = submittedDatabaseConfiguration.GenerateConnectionString(Information.ConnectionStringType.UseMaster);
-                emptyCatalogConnectionString = submittedDatabaseConfiguration.GenerateConnectionString(Information.ConnectionStringType.EmptyCatalog);
-                connectionString = submittedDatabaseConfiguration.GenerateConnectionString();
-
                 configurationStep = ConfigurationSteps.CheckingInstance;
             }
 
-            if (configurationStep == ConfigurationSteps.CheckingInstance)
+            if (configurationStep == ConfigurationSteps.CheckingInstance || configurationStep == ConfigurationSteps.InstanceFailure)
             {
                 configurationStep = CheckInstance();
                 if (configurationStep == ConfigurationSteps.InstanceFailure) return;
                 configurationStep = ConfigurationSteps.CheckingDatabase;
             }
 
-            if (configurationStep == ConfigurationSteps.CheckingDatabase)
+            if (configurationStep == ConfigurationSteps.CheckingDatabase || configurationStep == ConfigurationSteps.DatabaseNotAvailable)
             {
                 configurationStep = CheckDatabase(submittedDatabaseConfiguration);
                 if (configurationStep == ConfigurationSteps.DatabaseNotAvailable) return;
                 configurationStep = ConfigurationSteps.DatabaseAvailable;
             }
 
-            if (configurationStep == ConfigurationSteps.CreateDatabase)
+            if (configurationStep == ConfigurationSteps.CreateDatabase || configurationStep == ConfigurationSteps.CreateDatabaseFailed)
             {
                 configurationStep = CreateDatabase();
                 if (configurationStep == ConfigurationSteps.CreateDatabaseFailed) return;
@@ -351,6 +352,8 @@ namespace BOMBS.Service.Database
                     configurationStep = ConfigurationSteps.DatabaseAvailable;
                     communicator.ServerInformation.DatabaseInformation = submittedDatabaseConfiguration;
                     submittedDatabaseConfiguration.WriteResources();
+
+                    submittedDatabaseConfiguration.Populate(communicator.ServerInformation.DatabaseInformation);
                 }
                 else configurationStep = ConfigurationSteps.ImportCoreModuleFailed;
             }
@@ -383,45 +386,52 @@ namespace BOMBS.Service.Database
             }
         }
 
-        private void informOthers()
-        {
-            IEnumerable<KeyValuePair<string, ICommunicatorCallback>> callBackList = null;
-
-            callBackList = communicator.ClientList.Where(itm => itm.Key != databaseConnectionSessionID);
-            ConfigurationSteps stepToInform = configurationStep == ConfigurationSteps.InstanceFailure ? ConfigurationSteps.ConfigurationFailure : configurationStep;
-
-            IEnumerator<KeyValuePair<string, ICommunicatorCallback>> enumerator = callBackList.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                KeyValuePair<string, ICommunicatorCallback> callBack = enumerator.Current;
-                BackgroundWorker informOtherClientResult = new BackgroundWorker();
-
-                informOtherClientResult.DoWork += configureDatabaseWorker_DoWork;
-                informOtherClientResult.RunWorkerCompleted += configureDatabaseWorker_RunWorkerCompleted;
-
-                List<object> argumentList = new List<object>();
-                argumentList.Add(stepToInform);
-                argumentList.Add(callBack);
-
-                informOtherClientResult.RunWorkerAsync(argumentList);
-            }
-        }
-
         private void communicateDatabaseCallBack_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+
             if ((bool)e.Result)
             {
+                IEnumerable<KeyValuePair<string, ICommunicatorCallback>> callBackList = communicator.ClientList.Where(itm => itm.Key != databaseConnectionSessionID);
+
                 switch (configurationStep)
                 {
                     case ConfigurationSteps.DatabaseNotAvailable:
                         break;
                     case ConfigurationSteps.DatabaseAvailable:
-                        informOthers();
+
+                        IEnumerator<KeyValuePair<string, ICommunicatorCallback>> enumerator = callBackList.GetEnumerator();
+                        while (enumerator.MoveNext())
+                        {
+                            KeyValuePair<string, ICommunicatorCallback> callBack = enumerator.Current;
+
+
+                            BackgroundWorker informOtherWithAvailableDatabase = new BackgroundWorker();
+                            informOtherWithAvailableDatabase.DoWork += InformOtherWithAvailableDatabase_DoWork;
+                            informOtherWithAvailableDatabase.RunWorkerCompleted += InformOtherWithAvailableDatabase_RunWorkerCompleted;
+
+                            informOtherWithAvailableDatabase.RunWorkerAsync(callBack);
+
+                        }
                         if (OnDatabaseAvailable != null) OnDatabaseAvailable(this, EventArgs.Empty);
                         break;
                     default:
-                        informOthers();
+                        ConfigurationSteps stepToInform = configurationStep == ConfigurationSteps.InstanceFailure ? ConfigurationSteps.ConfigurationFailure : configurationStep;
+
+                        IEnumerator<KeyValuePair<string, ICommunicatorCallback>> enumDefault = callBackList.GetEnumerator();
+                        while (enumDefault.MoveNext())
+                        {
+                            KeyValuePair<string, ICommunicatorCallback> callBack = enumDefault.Current;
+                            BackgroundWorker informOtherClientResult = new BackgroundWorker();
+
+                            informOtherClientResult.DoWork += configureDatabaseWorker_DoWork;
+                            informOtherClientResult.RunWorkerCompleted += configureDatabaseWorker_RunWorkerCompleted;
+
+                            List<object> argumentList = new List<object>();
+                            argumentList.Add(stepToInform);
+                            argumentList.Add(callBack);
+
+                            informOtherClientResult.RunWorkerAsync(argumentList);
+                        }
                         break;
                 }
             }
@@ -430,27 +440,53 @@ namespace BOMBS.Service.Database
                 communicator.ClientList.Remove(databaseConnectionSessionID);
                 IEnumerable<KeyValuePair<string, ICommunicatorCallback>> callBackList = null;
                 callBackList = communicator.ClientList.Where(itm => itm.Key != databaseConnectionSessionID);
+                Information dbInformation = communicator.ServerInformation.DatabaseInformation;
                 IEnumerator<KeyValuePair<string, ICommunicatorCallback>> enumerator = callBackList.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
                     KeyValuePair<string, ICommunicatorCallback> callBack = enumerator.Current;
                     List<object> argumentList = new List<object>();
-                    Information dbInformation = communicator.ServerInformation.DatabaseInformation;
-                    Status previousStatus = dbInformation.Status;
 
                     dbInformation.Status = Status.DatabaseErrorConfiguration;
 
                     argumentList.Add(callBack);
-                    argumentList.Add(previousStatus);
+                    argumentList.Add(dbInformation);
 
                     BackgroundWorker databaseErrorConfiguration = new BackgroundWorker();
                     databaseErrorConfiguration.DoWork += databaseErrorConfiguration_DoWork;
                     databaseErrorConfiguration.RunWorkerAsync(argumentList);
-
                 }
             }
 
             ((BackgroundWorker)sender).Dispose();
+        }
+
+        private void InformOtherWithAvailableDatabase_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            object[] argumentResult = e.Result as object[];
+
+            if (!(bool)(argumentResult)[1]) communicator.ClientList.Remove(((KeyValuePair<string, ICommunicatorCallback>)argumentResult[0]).Key);
+        }
+
+        private void InformOtherWithAvailableDatabase_DoWork(object sender, DoWorkEventArgs e)
+        {
+            KeyValuePair<string, ICommunicatorCallback> callBack = (KeyValuePair<string, ICommunicatorCallback>)e.Argument;
+            Database.Information dbInfo = communicator.ServerInformation.DatabaseInformation;
+
+            bool result = true;
+            try
+            {
+                result = callBack.Value.ConnectDatabaseOnProgress(dbInfo, dbInfo.Status, Status.Ready);
+            }
+            catch
+            {
+                result = false;
+            }
+            finally
+            {
+                e.Result = new object[] { callBack, result };
+            }
+
         }
 
         private void configureDatabaseWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -500,11 +536,11 @@ namespace BOMBS.Service.Database
             List<object> argumentList = (List<object>)e.Argument;
             KeyValuePair<string, ICommunicatorCallback> callBack = (KeyValuePair<string, ICommunicatorCallback>)argumentList[0];
             Status previousStatus = (Status)argumentList[1];
-            Information dbInformation = communicator.ServerInformation.DatabaseInformation;
+            Information previousInformation = communicator.ServerInformation.DatabaseInformation;
 
             try
             {
-                callBack.Value.ConnectDatabaseOnProgress(dbInformation, previousStatus, dbInformation.Status);
+                callBack.Value.ConnectDatabaseOnProgress(previousInformation, previousStatus, previousInformation.Status);
             }
             catch
             {
@@ -527,10 +563,10 @@ namespace BOMBS.Service.Database
             List<object> arguments = (List<object>)e.Argument;
 
             KeyValuePair<string, ICommunicatorCallback> callback = (KeyValuePair<string, ICommunicatorCallback>)arguments[0];
-            Database.Information previousDatabaseInfo = (Database.Information)arguments[1];
+            Database.Information currentDatabaseInfo = (Database.Information)arguments[1];
             try
             {
-                callback.Value.ConnectDatabaseOnProgress(previousDatabaseInfo, previousDatabaseInfo.Status, communicator.ServerInformation.DatabaseInformation.Status);
+                callback.Value.ConnectDatabaseOnProgress(currentDatabaseInfo, currentDatabaseInfo.Status, communicator.ServerInformation.DatabaseInformation.Status);
             }
             catch (TimeoutException)
             {
