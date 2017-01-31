@@ -31,21 +31,10 @@ namespace BOMBS.Service.Database
         private string masterConnectionString = string.Empty;
         private string emptyCatalogConnectionString = string.Empty;
         private string connectionString = string.Empty;
+        private delegate void AsyncValidateConfiguration(Information configuration);
 
-        public void ValidateConfiguration(Database.Information databaseConfiguration)
+        private void DoValidateConfiguration(Information configuration)
         {
-            BackgroundWorker validateConfigurationWorker = new BackgroundWorker();
-
-            validateConfigurationWorker.DoWork += validateConfigurationWorker_DoWork;
-            validateConfigurationWorker.RunWorkerCompleted += validateConfigurationWorker_RunWorkerCompleted;
-
-            validateConfigurationWorker.RunWorkerAsync(databaseConfiguration);
-        }
-
-        private void validateConfigurationWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            Information configuration = (Information)e.Argument;
-
             if (configuration.Status == Status.ConfigurationRequiresValidation)
             {
                 configuration.Status = Status.ValidatingConfiguration;
@@ -60,104 +49,14 @@ namespace BOMBS.Service.Database
             }
 
             communicator.ServerInformation.DatabaseInformation.Status = configuration.Status;
-            e.Result = configuration.Status;
         }
 
-        private void validateConfigurationWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        public void ValidateConfiguration(Database.Information configuration)
         {
-            Status result = (Status)e.Result;
+            AsyncValidateConfiguration invoker = new AsyncValidateConfiguration(DoValidateConfiguration);
 
-            if (result == Status.Ready)
-            {
-                if (OnDatabaseAvailable == null) return;
-                OnDatabaseAvailable(this, EventArgs.Empty);
-
-                Dictionary<string, ICommunicatorCallback>.Enumerator enumerator = communicator.ClientList.GetEnumerator();
-                while (enumerator.MoveNext())
-                {
-                    KeyValuePair<string, ICommunicatorCallback> callback = enumerator.Current;
-                    BackgroundWorker validatingConfigurationSuccessfulWorker = new BackgroundWorker();
-
-                    validatingConfigurationSuccessfulWorker.DoWork += validatingConfigurationSuccessfulWorker_DoWork;
-                    validatingConfigurationSuccessfulWorker.RunWorkerCompleted += validatingConfigurationSuccessfulWorker_RunWorkerCompleted;
-
-                    validatingConfigurationSuccessfulWorker.RunWorkerAsync(callback);
-                }
-            }
-            else
-            {
-                Dictionary<string, ICommunicatorCallback>.Enumerator enumerator = communicator.ClientList.GetEnumerator();
-                while (enumerator.MoveNext())
-                {
-                    KeyValuePair<string, ICommunicatorCallback> callback = enumerator.Current;
-                    BackgroundWorker validatingConfigurationFailedWorker = new BackgroundWorker();
-
-                    validatingConfigurationFailedWorker.DoWork += validatingConfigurationFailedWorker_DoWork;
-                    validatingConfigurationFailedWorker.RunWorkerCompleted += validatingConfigurationFailedWorker_RunWorkerCompleted;
-
-                    validatingConfigurationFailedWorker.RunWorkerAsync(callback);
-                }
-            }
-
-            ((BackgroundWorker)sender).Dispose();
-        }
-
-        private void validatingConfigurationSuccessfulWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            KeyValuePair<string, ICommunicatorCallback> callback = (KeyValuePair<string, ICommunicatorCallback>)e.Argument;
-            bool success = false;
-            try
-            {
-                success = callback.Value.ValidatingDatabaseConfugationSuccessful();
-            }
-            catch
-            {
-                success = false;
-            }
-            finally
-            {
-                e.Result = new object[] { callback, success };
-            }
-        }
-
-        private void validatingConfigurationFailedWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            KeyValuePair<string, ICommunicatorCallback> callback = (KeyValuePair<string, ICommunicatorCallback>)e.Argument;
-            bool success = false;
-            try
-            {
-                success = callback.Value.ValidatingDatabaseConfigurationFailed();
-            }
-            catch
-            {
-                success = false;
-            }
-            finally
-            {
-                e.Result = new object[] { callback, success };
-            }
-
-        }
-
-        private void validatingConfigurationFailedWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            object[] result = (object[])e.Result;
-            KeyValuePair<string, ICommunicatorCallback> callback = (KeyValuePair<string, ICommunicatorCallback>)result[0];
-            bool success = (bool)result[1];
-
-            if (!success) communicator.Disconnect(callback.Key);
-
-            ((BackgroundWorker)sender).Dispose();
-        }
-
-        private void validatingConfigurationSuccessfulWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            object[] result = (object[])e.Result;
-            KeyValuePair<string, ICommunicatorCallback> callback = (KeyValuePair<string, ICommunicatorCallback>)result[0];
-            bool success = (bool)result[1];
-
-            if (!success) communicator.Disconnect(callback.Key);
-            ((BackgroundWorker)sender).Dispose();
+            IAsyncResult result = invoker.BeginInvoke(configuration, null, null);
+            invoker.EndInvoke(result);
         }
 
         public void ConnectDatabase(Database.Information databaseConfiguration)
