@@ -22,6 +22,7 @@ using BOMBS.Client.Communicator;
 
 using ClientServer = BOMBS.Client.Communicator.Server;
 using Database = BOMBS.Client.Communicator.Database;
+using BOMBS.UI.Foundation;
 
 namespace BOMBS.Client.Console
 {
@@ -149,7 +150,9 @@ namespace BOMBS.Client.Console
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            WizardWindow wwTest = new WizardWindow();
 
+            wwTest.ShowDialog();
         }
 
     }

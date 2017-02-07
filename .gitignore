@@ -11,26 +11,18 @@
 #BOFP.CRM Ignores
 ##############################################################################################################################################################################
 BOFP.CRM/BOFP.ClientRelationManagement/[Bb]in/
-BOFP.CRM/BOFP.ClientRelationManagement/BOFP.ClientRelationManagement.csproj
 BOFP.CRM/BOFP.ClientRelationManagement/[Oo]bj/
-BOFP.CRM/BOFP.ConsoleApplication.Experiment/BOFP.ConsoleApplication.Experiment.csproj
 BOFP.CRM/BOFP.ConsoleApplication.Experiment/[Oo]bj/
-BOFP.CRM/BOFP.CRM.sln
 ##############################################################################################################################################################################
 
 
 ##############################################################################################################################################################################
 #BOMBS.Client Ignores
 ##############################################################################################################################################################################
-BOMBS.Client/BOMBS.Client.Console/BOMBS.Client.Console.csproj
 BOMBS.Client/BOMBS.Client.Console/[Oo]bj/
-BOMBS.Client/BOMBS.Client.sln
-BOMBS.Client/BOMBS.Client.UI.Test/BOMBS.Client.UI.Test.csproj
 BOMBS.Client/BOMBS.Client.UI.Test/[Oo]bj/
-BOMBS.Client/BOMBS.Client/BOMBS.Client.csproj
 BOMBS.Client/BOMBS.Client/[Oo]bj/
 BOMBS.Client/BOMBS.Client/Service References/
-BOMBS.Client/BOMBS.UI.Foundation/BOMBS.UI.Foundation.csproj
 BOMBS.Client/BOMBS.UI.Foundation/[Oo]bj/
 ##############################################################################################################################################################################
 
@@ -38,23 +30,16 @@ BOMBS.Client/BOMBS.UI.Foundation/[Oo]bj/
 ##############################################################################################################################################################################
 #BOMBS.HRMS Ignores
 ##############################################################################################################################################################################
-BOMBS.HRMS/BOMBS.HRMS.Entites/BOMBS.HRMS.Entites.csproj
 BOMBS.HRMS/BOMBS.HRMS.Entites/[Oo]bj/
-BOMBS.HRMS/BOMBS.HRMS.sln
 ##############################################################################################################################################################################
 
 
 ##############################################################################################################################################################################
 #BOMBS.Service Ignores
 ##############################################################################################################################################################################
-BOMBS.Service/BOMBS.Experiments.ConsoleApplication/BOMBS.Experiments.ConsoleApplication.csproj
 BOMBS.Service/BOMBS.Experiments.ConsoleApplication/[Oo]bj/
-BOMBS.Service/Bombs.Service.AppController/BOMBS.Service.AppController.csproj
 BOMBS.Service/Bombs.Service.AppController/[Oo]bj/
-BOMBS.Service/BOMBS.Service.sln
-BOMBS.Service/BOMBS.Service/BOMBS.Service.csproj
 BOMBS.Service/BOMBS.Service/[Oo]bj/
-BOMBS.Service/BOMBS.ServiceServer/BOMBS.ServiceServer.csproj
 BOMBS.Service/BOMBS.ServiceServer/[Oo]bj/
 ##############################################################################################################################################################################
 
@@ -62,15 +47,10 @@ BOMBS.Service/BOMBS.ServiceServer/[Oo]bj/
 ##############################################################################################################################################################################
 #BOMBS Core Ignores
 ##############################################################################################################################################################################
-BOMBS/BOMBS.Administration/BOMBS.Administration.csproj
 BOMBS/BOMBS.Administration/[Oo]bj/
-BOMBS/BOMBS.Core.Console.Test/BOMBS.Core.Console.Test.csproj
 BOMBS/BOMBS.Core.Console.Test/[Oo]bj/
-BOMBS/BOMBS.Core.Library/BOMBS.Core.Library.csproj
 BOMBS/BOMBS.Core.Library/[Oo]bj/
-BOMBS/BOMBS.Core/BOMBS.Core.csproj
 BOMBS/BOMBS.Core/[Oo]bj/
-BOMBS/BOMBS.sln
 ##############################################################################################################################################################################
 /BOMBS.Service/BOMBS.Experiments.ConsoleApplication/bin/Debug
 /BOMBS.Service/.vs/BOMBS.Service/v14
