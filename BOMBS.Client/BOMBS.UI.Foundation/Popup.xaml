@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:BOMBS.UI.Foundation"
         xmlns:localcontrols="clr-namespace:BOMBS.UI.Foundation.Controls"
         Title="Popup" MinHeight="320" MinWidth="320" ResizeMode="NoResize" 
-        Icon="Resources/bomb.png" Loaded="WindowBase_Loaded" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Icon="Resources/bomb.png" Loaded="WindowBase_Loaded" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" >
     <Grid Name="layoutGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

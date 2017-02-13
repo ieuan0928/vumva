@@ -4,9 +4,83 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BOMBS.UI.Foundation"
-        mc:Ignorable="d"
-        Title="WizardWindow" Height="300" Width="300" Icon="Resources/bomb.png" WindowStyle="ToolWindow">
+        mc:Ignorable="d" Title="WizardWindow" 
+        xmlns:localcontrols="clr-namespace:BOMBS.UI.Foundation.Controls"
+        Width="640" Height="480" MinWidth="640" MinHeight="480" Icon="Resources/bomb.png" WindowStyle="ToolWindow">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="3" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF739AEE" Offset="0"/>
+                    <GradientStop Color="#FF426DD1" Offset="1"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="2" />
+                    <RowDefinition Height="1" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="5,9,5,7">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Image Name="imgPopup" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    <TextBlock Name="txtPopupTitle" Grid.Column="2" Text="Popup Title" Foreground="#FFE6E6E6" FontSize="12" />
+                </Grid>
+                <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#19000000"  />
+                <StackPanel Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#19FFFFFF"  />
+                <StackPanel Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#4C000000"  />
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#4C000000" Offset="0"/>
+                    <GradientStop Color="#00000000" Offset="1"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <localcontrols:StepContent Margin="6,6,6,7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+            <Border Grid.Column="1" Width="0.123" HorizontalAlignment="Center" VerticalAlignment="Stretch" >
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0.113"/>
+                        <GradientStop Color="#00000000" Offset="0.954"/>
+                        <GradientStop Color="White"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+        </Grid>
+        <StackPanel Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#006495ED" Offset="0"/>
+                    <GradientStop Color="#AD6495ED" Offset="1"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+        </StackPanel>
+        <StackPanel Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF8F8F8F"/>
+        <StackPanel Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFFFFFFF"/>
+        <localcontrols:DialogButtons ButtonSet="Wizard" Grid.Row="6" />
     </Grid>
 </local:WindowBase>
