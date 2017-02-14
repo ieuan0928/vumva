@@ -25,7 +25,7 @@ namespace BOMBS.UI.Foundation.Utilities
 
         private Stopwatch timer;
 
-        private int splashTime = 4000;
+        private int splashTime = 200;
         public int SplashTime
         {
             get { return splashTime; }

@@ -64,6 +64,9 @@
     <Compile Include="Controls\StepContent.xaml.cs">
       <DependentUpon>StepContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StepContentNodes.xaml.cs">
+      <DependentUpon>StepContentNodes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ValidationRule\BaseRule.cs" />
     <Compile Include="Controls\ValidationRule\PasswordRule.cs" />
     <Compile Include="Controls\ValidationRule\WholeNumberRule.cs" />
@@ -115,6 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\StepContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StepContentNodes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

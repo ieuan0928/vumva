@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BOMBS.UI.Foundation"
         mc:Ignorable="d" Title="WizardWindow" 
         xmlns:localcontrols="clr-namespace:BOMBS.UI.Foundation.Controls"
-        Width="640" Height="480" MinWidth="640" MinHeight="480" Icon="Resources/bomb.png" WindowStyle="ToolWindow">
+        Width="640" Height="480" MinWidth="640" MinHeight="480" Icon="Resources/bomb.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
