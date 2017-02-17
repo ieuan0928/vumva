@@ -12,8 +12,8 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="7" />
         </Grid.ColumnDefinitions>
-        <Label Name="lbl" VerticalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch">
-            <TextBlock Text="test igit"></TextBlock>
+        <Label Name="nodeLabel" VerticalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch">
+            <TextBlock Name="nodeTextBlock" Text="test igit" Foreground="Black" />
         </Label>
     </Grid>
 </UserControl>

@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <local:StepContentNodes Grid.Row="0" State="Disabled" />
-        <local:StepContentNodes Grid.Row="1" State="Default" />
+        <local:StepContentNodes Grid.Row="1" State="Focused" />
         <local:StepContentNodes Grid.Row="2" State="Active" />
     </Grid>
 </UserControl>
