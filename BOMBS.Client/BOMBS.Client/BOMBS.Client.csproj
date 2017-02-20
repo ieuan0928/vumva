@@ -80,6 +80,26 @@
     </Compile>
     <Compile Include="Communicator\Server\TestConnectionVariables.cs" />
     <Compile Include="Communicator\WindowNotification.cs" />
+    <Compile Include="Initialization\AdminProfilePage.xaml.cs">
+      <DependentUpon>AdminProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Initialization\Dialogs.cs" />
+    <Compile Include="Initialization\InitializationData.cs" />
+    <Compile Include="Initialization\ResultsPage.xaml.cs">
+      <DependentUpon>ResultsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Initialization\ServiceMapPage.xaml.cs">
+      <DependentUpon>ServiceMapPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Initialization\SummaryPage.xaml.cs">
+      <DependentUpon>SummaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Initialization\UserRolesPage.xaml.cs">
+      <DependentUpon>UserRolesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Initialization\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Communicator\Server\ServerCollection.cs" />
     <Compile Include="Communicator\Server\ServerVariables.cs" />
@@ -117,6 +137,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Communicator\Server\Controls\ServerList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Initialization\AdminProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Initialization\ResultsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Initialization\ServiceMapPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Initialization\SummaryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Initialization\UserRolesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Initialization\WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

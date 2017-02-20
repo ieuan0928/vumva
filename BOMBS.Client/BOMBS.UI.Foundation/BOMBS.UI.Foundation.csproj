@@ -61,10 +61,10 @@
       <DependentUpon>MessageNotification.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PasswordBoxExtension.cs" />
-    <Compile Include="Controls\StepContent.xaml.cs">
+    <Compile Include="Wizard\Controls\StepContent.xaml.cs">
       <DependentUpon>StepContent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\StepContentNodes.xaml.cs">
+    <Compile Include="Wizard\Controls\StepContentNodes.xaml.cs">
       <DependentUpon>StepContentNodes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ValidationRule\BaseRule.cs" />
@@ -95,8 +95,11 @@
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowBase.cs" />
-    <Compile Include="WizardWindow.xaml.cs">
-      <DependentUpon>WizardWindow.xaml</DependentUpon>
+    <Compile Include="Wizard\Content.cs" />
+    <Compile Include="Wizard\Context.cs" />
+    <Compile Include="Wizard\Step.cs" />
+    <Compile Include="Wizard\Window.xaml.cs">
+      <DependentUpon>Window.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -117,11 +120,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\StepContent.xaml">
+    <Page Include="Wizard\Controls\StepContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\StepContentNodes.xaml">
+    <Page Include="Wizard\Controls\StepContentNodes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,7 +144,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="WizardWindow.xaml">
+    <Page Include="Wizard\Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

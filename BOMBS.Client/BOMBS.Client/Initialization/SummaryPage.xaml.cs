@@ -12,14 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BOMBS.UI.Foundation.Controls
+namespace BOMBS.Client.Initialization
 {
     /// <summary>
-    /// Interaction logic for StepContent.xaml
+    /// Interaction logic for SummaryPage.xaml
     /// </summary>
-    public partial class StepContent : UserControl
+    public partial class SummaryPage : UserControl
     {
-        public StepContent()
+        public SummaryPage()
         {
             InitializeComponent();
         }

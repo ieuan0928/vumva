@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BOMBS.UI.Foundation.Controls
+namespace BOMBS.UI.Foundation.Wizard.Controls
 {
     public partial class StepContentNodes : UserControl
     {
@@ -39,19 +39,26 @@ namespace BOMBS.UI.Foundation.Controls
             set { _state = value; }
         }
 
+        public string Title
+        {
+            get { return nodeTextBlock.Text; }
+            set { nodeTextBlock.Text = value; }
+        }
+
         public override void OnApplyTemplate()
         {
             switch (State)
             {
                 case StateEnum.Active:
                     nodeTextBlock.Cursor = Cursors.Hand;
-
                     nodeTextBlock.MouseEnter += NodeTextBlock_MouseEnter;
                     nodeTextBlock.MouseLeave += NodeTextBlock_MouseLeave;
                     break;
 
                 case StateEnum.Focused:
-                    nodeLabel.Background = new SolidColorBrush(Colors.White);
+                    nodeBorder.Background = new SolidColorBrush(Colors.White);
+                    nodeBorder.BorderThickness = new Thickness(1, 1, 0, 1);
+                    nodeTextBlock.FontWeight = FontWeights.Bold;
                     break;
                 case StateEnum.Disabled:
                     nodeTextBlock.Foreground = new SolidColorBrush(Color.FromRgb(180, 180, 180));

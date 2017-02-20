@@ -9,16 +9,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BOMBS.UI.Foundation
+namespace BOMBS.Client.Initialization
 {
     /// <summary>
-    /// Interaction logic for WizardWindow.xaml
+    /// Interaction logic for ResultsPage.xaml
     /// </summary>
-    public partial class WizardWindow : WindowBase
+    public partial class ResultsPage : UserControl
     {
-        public WizardWindow()
+        public ResultsPage()
         {
             InitializeComponent();
         }
