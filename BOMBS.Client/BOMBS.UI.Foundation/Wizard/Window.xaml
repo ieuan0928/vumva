@@ -84,6 +84,6 @@
         </StackPanel>
         <StackPanel Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF8F8F8F"/>
         <StackPanel Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFFFFFFF"/>
-        <localcontrols:DialogButtons ButtonSet="Wizard" Grid.Row="6" />
+        <localcontrols:DialogButtons x:Name="dialogButtonControl" ButtonSet="Wizard" Grid.Row="6" OnDialogButtonClicked="dialogButtonControl_OnDialogButtonClicked" />
     </Grid>
 </local:WindowBase>

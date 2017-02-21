@@ -12,7 +12,7 @@
             <ColumnDefinition Width="7" />
         </Grid.ColumnDefinitions>
         <Border BorderBrush="Gainsboro" Grid.Column="0" BorderThickness="1,0,0,0" />
-        <Border Name="nodeBorder" BorderBrush="Gainsboro" Grid.Column="1" Grid.ColumnSpan="2" CornerRadius="6,0,0,6" BorderThickness="0,0,1,0">
+        <Border Name="nodeBorder" BorderBrush="Gainsboro" Grid.Column="1" Grid.ColumnSpan="2" CornerRadius="3,0,0,3" BorderThickness="0,0,1,0">
             <Label Name="nodeLabel"  VerticalContentAlignment="Center" VerticalAlignment="Stretch" >
                 <TextBlock Name="nodeTextBlock" Foreground="Black" Margin="7,0,0,0" />
             </Label>

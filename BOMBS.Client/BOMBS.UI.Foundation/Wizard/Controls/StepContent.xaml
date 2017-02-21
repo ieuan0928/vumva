@@ -10,7 +10,7 @@
             <RowDefinition Height="7" />
             <RowDefinition Height="*" MinHeight="7" />
         </Grid.RowDefinitions>
-        <Border BorderThickness="1,1,1,0" Grid.Row="0" Background="WhiteSmoke" BorderBrush="Gainsboro" CornerRadius="6,6,0,0" />
-        <Border Name="bottomBorder" BorderThickness="1,0,1,1" Grid.Row="4" Background="WhiteSmoke" BorderBrush="Gainsboro" CornerRadius="0,0,6,6" />
+        <Border BorderThickness="1,1,1,0" Grid.Row="0" Background="WhiteSmoke" BorderBrush="Gainsboro" CornerRadius="3,3,0,0" />
+        <Border Name="bottomBorder" BorderThickness="1,0,1,1" Grid.Row="4" Background="WhiteSmoke" BorderBrush="Gainsboro" CornerRadius="0,0,3,3" />
     </Grid>
 </UserControl>
