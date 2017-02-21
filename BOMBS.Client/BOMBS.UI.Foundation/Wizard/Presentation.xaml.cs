@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOMBS.UI.Foundation.Controls.Dialog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,21 @@ namespace BOMBS.UI.Foundation.Wizard
         public Window()
         {
             InitializeComponent();
+
+            dialogButtonControl.OnDialogButtonClicked += DialogButtonControl_OnDialogButtonClicked;
+        }
+
+        private void DialogButtonControl_OnDialogButtonClicked(object sender, Foundation.Controls.Dialog.ButtonClickEventArgs e)
+        {
+            switch (e.Type)
+            {
+                case ButtonClickEventArgs.ButtonType.NextButton:
+                    stepContentControl.SelectedIndex++;
+                    break;
+                case ButtonClickEventArgs.ButtonType.PreviousButton:
+                    stepContentControl.SelectedIndex--;
+                    break;
+            }
         }
 
         public Window(Content wizardContent) : this()

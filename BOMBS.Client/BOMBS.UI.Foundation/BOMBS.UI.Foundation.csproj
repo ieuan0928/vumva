@@ -98,8 +98,8 @@
     <Compile Include="Wizard\Content.cs" />
     <Compile Include="Wizard\Context.cs" />
     <Compile Include="Wizard\Step.cs" />
-    <Compile Include="Wizard\Window.xaml.cs">
-      <DependentUpon>Window.xaml</DependentUpon>
+    <Compile Include="Wizard\Presentation.xaml.cs">
+      <DependentUpon>Presentation.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -144,7 +144,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Wizard\Window.xaml">
+    <Page Include="Wizard\Presentation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

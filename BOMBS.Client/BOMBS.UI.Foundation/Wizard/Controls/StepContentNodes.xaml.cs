@@ -24,6 +24,8 @@ namespace BOMBS.UI.Foundation.Wizard.Controls
             Focused = 1
         }
 
+        public event EventHandler OnClick;
+
         //public static readonly DependencyProperty StateProperty = DependencyProperty.Register("State", typeof(StateEnum), typeof(StepContentNodes), new PropertyMetadata(StateEnum.Default));
 
         public StepContentNodes()
@@ -31,12 +33,22 @@ namespace BOMBS.UI.Foundation.Wizard.Controls
             InitializeComponent();
         }
 
+        private int myIndex = 0;
+        public int NodeIndex
+        {
+            get { return myIndex; }
+            set { myIndex = value; }
+        }
 
         private StateEnum _state = StateEnum.Active;
         public StateEnum State
         {
             get { return _state; }
-            set { _state = value; }
+            set
+            {
+                _state = value;
+                ApplyState();
+            }
         }
 
         public string Title
@@ -45,20 +57,44 @@ namespace BOMBS.UI.Foundation.Wizard.Controls
             set { nodeTextBlock.Text = value; }
         }
 
-        public override void OnApplyTemplate()
+        private void ClearTextBlockEvents()
         {
-            switch (State)
+            nodeTextBlock.TextDecorations = null;
+            nodeTextBlock.Cursor = Cursors.Arrow;
+
+            nodeTextBlock.MouseEnter -= NodeTextBlock_MouseEnter;
+            nodeTextBlock.MouseLeave -= NodeTextBlock_MouseLeave;
+            nodeTextBlock.PreviewMouseDown -= NodeTextBlock_PreviewMouseDown;
+        }
+
+        private void ApplyState()
+        {
+            switch (_state)
             {
                 case StateEnum.Active:
+                    nodeBorder.Background = new SolidColorBrush(Colors.Transparent);
+                    nodeBorder.BorderThickness = new Thickness(0, 0, 1, 0);
+
+                    nodeTextBlock.FontWeight = FontWeights.Normal;
                     nodeTextBlock.Cursor = Cursors.Hand;
+                    nodeTextBlock.Effect = null;
+                    nodeTextBlock.Foreground = new SolidColorBrush(Colors.Black);
+
                     nodeTextBlock.MouseEnter += NodeTextBlock_MouseEnter;
                     nodeTextBlock.MouseLeave += NodeTextBlock_MouseLeave;
-                    break;
+                    nodeTextBlock.PreviewMouseDown += NodeTextBlock_PreviewMouseDown;
 
+                    break;
                 case StateEnum.Focused:
+                    nodeTextBlock.Foreground = new SolidColorBrush(Colors.Black);
+                    nodeTextBlock.FontWeight = FontWeights.Bold;
+                    nodeTextBlock.Effect = null;
+
                     nodeBorder.Background = new SolidColorBrush(Colors.White);
                     nodeBorder.BorderThickness = new Thickness(1, 1, 0, 1);
-                    nodeTextBlock.FontWeight = FontWeights.Bold;
+
+                    ClearTextBlockEvents();
+
                     break;
                 case StateEnum.Disabled:
                     nodeTextBlock.Foreground = new SolidColorBrush(Color.FromRgb(180, 180, 180));
@@ -70,10 +106,23 @@ namespace BOMBS.UI.Foundation.Wizard.Controls
                         RenderingBias = RenderingBias.Quality,
                         Color = Color.FromArgb(125, 255, 255, 255)
                     };
+
+                    ClearTextBlockEvents();
+
                     break;
 
             }
+        }
 
+        private void NodeTextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (OnClick != null) OnClick(this, new EventArgs());
+        }
+
+        public override void OnApplyTemplate()
+        {
+
+            ApplyState();
             base.OnApplyTemplate();
         }
 
@@ -86,7 +135,7 @@ namespace BOMBS.UI.Foundation.Wizard.Controls
         private void NodeTextBlock_MouseEnter(object sender, MouseEventArgs e)
         {
             TextBlock me = (TextBlock)sender;
-            me.TextDecorations = TextDecorations.Underline;           
+            me.TextDecorations = TextDecorations.Underline;
         }
     }
 }

@@ -61,7 +61,7 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ScrollViewer Focusable="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <wizardcontrols:StepContent x:Name="stepContentControl" Margin="6,6,6,7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
             </ScrollViewer>
             <Border Grid.Column="1" Width="0.123" HorizontalAlignment="Center" VerticalAlignment="Stretch" >
