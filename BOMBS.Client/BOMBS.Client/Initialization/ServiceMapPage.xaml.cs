@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOMBS.UI.Foundation.Wizard.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace BOMBS.Client.Initialization
     /// <summary>
     /// Interaction logic for ServiceMapPage.xaml
     /// </summary>
-    public partial class ServiceMapPage : UserControl
+    public partial class ServiceMapPage : PageBase
     {
         public ServiceMapPage()
         {

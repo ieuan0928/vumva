@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOMBS.UI.Foundation.Wizard.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace BOMBS.Client.Initialization
     /// <summary>
     /// Interaction logic for SummaryPage.xaml
     /// </summary>
-    public partial class SummaryPage : UserControl
+    public partial class SummaryPage : PageBase
     {
         public SummaryPage()
         {

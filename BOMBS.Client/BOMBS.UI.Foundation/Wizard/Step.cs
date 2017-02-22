@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOMBS.UI.Foundation.Wizard.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,8 +29,8 @@ namespace BOMBS.UI.Foundation.Wizard
             set { typeOfStep = value; }
         }
 
-        private UserControl stepInstance = null;
-        public UserControl StepInstance
+        private PageBase stepInstance = null;
+        public PageBase StepInstance
         {
             get { return stepInstance; }
             set { stepInstance = value; }

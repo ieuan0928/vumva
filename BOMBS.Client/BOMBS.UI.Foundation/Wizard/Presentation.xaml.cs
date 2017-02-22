@@ -1,4 +1,5 @@
 ﻿using BOMBS.UI.Foundation.Controls.Dialog;
+using BOMBS.UI.Foundation.Wizard.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,23 +49,30 @@ namespace BOMBS.UI.Foundation.Wizard
             set { wizardContent = value; }
         }
 
+        private void LoadStep(Step stepToLoad)
+        {
+            if (stepToLoad.StepInstance == null)
+                stepToLoad.StepInstance = Activator.CreateInstance(stepToLoad.TypeOfStep) as PageBase;
+
+            string titleToLoad = stepToLoad.StepInstance.Title;
+
+            if (string.IsNullOrEmpty(titleToLoad)) headerTextBlock.Text = stepToLoad.Title;
+            else if (string.IsNullOrEmpty(titleToLoad.Trim())) headerTextBlock.Text = stepToLoad.Title;
+            else headerTextBlock.Text = titleToLoad.Trim();
+
+            pageViewer.Content = stepToLoad.StepInstance;
+        }
+
         public override void OnApplyTemplate()
         {
             stepContentControl.Steps = wizardContent.Steps;
-
-            Step firstStep = stepContentControl.Steps[0];
-            firstStep.StepInstance = Activator.CreateInstance(firstStep.TypeOfStep) as UserControl;
-            pageViewer.Content = firstStep.StepInstance;
-
+            LoadStep(stepContentControl.Steps[0]);
             base.OnApplyTemplate();
         }
 
         private void stepContentControl_OnFocusedStepChanged(object sender, FocusedStepArg e)
         {
-            if (e.Step.StepInstance == null)
-                e.Step.StepInstance = Activator.CreateInstance(e.Step.TypeOfStep) as UserControl; 
-           
-            pageViewer.Content = e.Step.StepInstance;
+            LoadStep(e.Step);
         }
     }
 }

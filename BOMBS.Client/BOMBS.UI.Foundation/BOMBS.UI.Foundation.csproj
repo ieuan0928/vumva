@@ -61,6 +61,7 @@
       <DependentUpon>MessageNotification.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PasswordBoxExtension.cs" />
+    <Compile Include="Wizard\Controls\PageBase.cs" />
     <Compile Include="Wizard\Controls\StepContent.xaml.cs">
       <DependentUpon>StepContent.xaml</DependentUpon>
     </Compile>

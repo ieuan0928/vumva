@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOMBS.UI.Foundation.Wizard.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,13 @@ namespace BOMBS.Client.Initialization
     /// <summary>
     /// Interaction logic for WelcomePage.xaml
     /// </summary>
-    public partial class WelcomePage : UserControl
+    public partial class WelcomePage : PageBase
     {
         public WelcomePage()
         {
             InitializeComponent();
+
+            Title = "Welcome to Initialization Wizard";
         }
     }
 }
