@@ -97,6 +97,7 @@
     <Compile Include="WindowBase.cs" />
     <Compile Include="Wizard\Content.cs" />
     <Compile Include="Wizard\Context.cs" />
+    <Compile Include="Wizard\Handler.cs" />
     <Compile Include="Wizard\Step.cs" />
     <Compile Include="Wizard\Presentation.xaml.cs">
       <DependentUpon>Presentation.xaml</DependentUpon>

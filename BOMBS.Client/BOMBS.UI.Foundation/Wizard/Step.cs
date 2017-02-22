@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
 
 namespace BOMBS.UI.Foundation.Wizard
 {
@@ -25,6 +26,13 @@ namespace BOMBS.UI.Foundation.Wizard
         {
             get { return typeOfStep; }
             set { typeOfStep = value; }
+        }
+
+        private UserControl stepInstance = null;
+        public UserControl StepInstance
+        {
+            get { return stepInstance; }
+            set { stepInstance = value; }
         }
     }
 }

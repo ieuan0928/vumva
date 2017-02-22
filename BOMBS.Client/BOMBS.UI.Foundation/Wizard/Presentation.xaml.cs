@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace BOMBS.UI.Foundation.Wizard
 {
-    /// <summary>
-    /// Interaction logic for WizardWindow.xaml
-    /// </summary>
     public partial class Window : WindowBase
     {
         public Window()
@@ -54,7 +51,20 @@ namespace BOMBS.UI.Foundation.Wizard
         public override void OnApplyTemplate()
         {
             stepContentControl.Steps = wizardContent.Steps;
+
+            Step firstStep = stepContentControl.Steps[0];
+            firstStep.StepInstance = Activator.CreateInstance(firstStep.TypeOfStep) as UserControl;
+            pageViewer.Content = firstStep.StepInstance;
+
             base.OnApplyTemplate();
+        }
+
+        private void stepContentControl_OnFocusedStepChanged(object sender, FocusedStepArg e)
+        {
+            if (e.Step.StepInstance == null)
+                e.Step.StepInstance = Activator.CreateInstance(e.Step.TypeOfStep) as UserControl; 
+           
+            pageViewer.Content = e.Step.StepInstance;
         }
     }
 }

@@ -21,6 +21,8 @@ namespace BOMBS.UI.Foundation.Wizard.Controls
             InitializeComponent();
         }
 
+        public event FocusedStepHandler OnFocusedStepChanged;
+
         private IList<Step> steps;
         public IList<Step> Steps
         {
@@ -46,7 +48,11 @@ namespace BOMBS.UI.Foundation.Wizard.Controls
         private void selectedIndexChanged(int previousValue, int newValue)
         {
             (container.Children[previousValue + 1] as StepContentNodes).State = StepContentNodes.StateEnum.Active;
-            (container.Children[newValue + 1] as StepContentNodes).State = StepContentNodes.StateEnum.Focused;
+
+            StepContentNodes focusedNode = container.Children[newValue + 1] as StepContentNodes;
+            focusedNode.State = StepContentNodes.StateEnum.Focused;
+
+            if (OnFocusedStepChanged != null) OnFocusedStepChanged(this, new FocusedStepArg(newValue, steps[newValue], focusedNode));
         }
 
         private void AddStepContentNodes(int index, Step stepToAdd, StepContentNodes.StateEnum state)

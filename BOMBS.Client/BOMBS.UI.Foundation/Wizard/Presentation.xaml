@@ -62,7 +62,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <ScrollViewer Focusable="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <wizardcontrols:StepContent x:Name="stepContentControl" Margin="6,6,6,7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                <wizardcontrols:StepContent x:Name="stepContentControl" Margin="6,6,6,7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" OnFocusedStepChanged="stepContentControl_OnFocusedStepChanged" />
             </ScrollViewer>
             <Border Grid.Column="1" Width="0.123" HorizontalAlignment="Center" VerticalAlignment="Stretch" >
                 <Border.Background>
@@ -73,6 +73,7 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
+            <ScrollViewer Name="pageViewer" Grid.Column="2" Focusable="False" Padding="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
         </Grid>
         <StackPanel Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel.Background>
