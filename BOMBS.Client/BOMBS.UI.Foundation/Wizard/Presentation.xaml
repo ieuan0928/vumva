@@ -7,111 +7,118 @@
         mc:Ignorable="d" Title="WizardWindow" 
         xmlns:localcontrols ="clr-namespace:BOMBS.UI.Foundation.Controls"
         xmlns:wizardcontrols="clr-namespace:BOMBS.UI.Foundation.Wizard.Controls"
-        Width="640" Height="480" MinWidth="640" MinHeight="480" Icon="/BOMBS.UI.Foundation;component/Resources/bomb.png">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="3" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="2" />
-            <RowDefinition Height="1" />
-            <RowDefinition Height="1" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <StackPanel.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF739AEE" Offset="0"/>
-                    <GradientStop Color="#FF426DD1" Offset="1"/>
-                </LinearGradientBrush>
-            </StackPanel.Background>
-            <Grid>
+        Width="640" Height="480" MinWidth="640" MinHeight="480" 
+        Icon="/BOMBS.UI.Foundation;component/Resources/bomb.png" 
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent" Padding="20">
+    <Border Padding="3" CornerRadius="3" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gainsboro">
+        <Border BorderThickness="1" BorderBrush="Gainsboro">
+            <Grid Background="White">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="1" />
-                    <RowDefinition Height="1" />
+                    <RowDefinition Height="3" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="2" />
                     <RowDefinition Height="1" />
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Margin="5,9,5,7">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="5" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Image Name="imgPopup" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                    <TextBlock Name="txtPopupTitle" Grid.Column="2" Text="Popup Title" Foreground="#FFE6E6E6" FontSize="12" />
-                </Grid>
-                <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#19000000"  />
-                <StackPanel Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#19FFFFFF"  />
-                <StackPanel Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#4C000000"  />
-            </Grid>
-        </StackPanel>
-        <StackPanel Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
-            <StackPanel.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#4C000000" Offset="0"/>
-                    <GradientStop Color="#00000000" Offset="1"/>
-                </LinearGradientBrush>
-            </StackPanel.Background>
-        </StackPanel>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="220" />
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <ScrollViewer Focusable="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <wizardcontrols:StepContent x:Name="stepContentControl" Margin="6,6,6,7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" OnFocusedStepChanged="stepContentControl_OnFocusedStepChanged" />
-            </ScrollViewer>
-            <Border Grid.Column="1" Width="0.123" HorizontalAlignment="Center" VerticalAlignment="Stretch" >
-                <Border.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black" Offset="0.113"/>
-                        <GradientStop Color="#00000000" Offset="0.954"/>
-                        <GradientStop Color="White"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-            </Border>
-            <Grid Grid.Column="2" Margin="0,10,0,0">
-                <Grid.RowDefinitions>
+                    <RowDefinition Height="1" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Border BorderThickness="0,0,0,1" Margin="10,0,0,0" Padding="0,0,0,5" >
-                    <Border.BorderBrush>
-                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
-                            <GradientStop Color="#19000000"/>
+                <StackPanel Name="caption" Grid.Row="0" MouseDown="caption_MouseDown">
+                    <StackPanel.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF739AEE" Offset="0"/>
+                            <GradientStop Color="#FF426DD1" Offset="1"/>
+                        </LinearGradientBrush>
+                    </StackPanel.Background>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="1" />
+                            <RowDefinition Height="1" />
+                            <RowDefinition Height="2" />
+                            <RowDefinition Height="1" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="5,9,5,7">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Name="imgPopup" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                            <TextBlock Name="txtPopupTitle" Grid.Column="2" Text="Popup Title" Foreground="#FFE6E6E6" FontSize="12" />
+                        </Grid>
+                        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#19000000"  />
+                        <StackPanel Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#19FFFFFF"  />
+                        <StackPanel Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#4C000000"  />
+                    </Grid>
+                </StackPanel>
+                <StackPanel Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+                    <StackPanel.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#4C000000" Offset="0"/>
                             <GradientStop Color="#00000000" Offset="1"/>
                         </LinearGradientBrush>
-                    </Border.BorderBrush>
-                    <TextBlock Name="headerTextBlock" FontSize="18" FontWeight="Black" Margin="0,0,5,0" >
-                        <TextBlock.Foreground>
-                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                <GradientStop Color="#FF507ad9" Offset="0"/>
-                                <GradientStop Color="#FF4167c0" Offset="1"/>
+                    </StackPanel.Background>
+                </StackPanel>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer Focusable="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <wizardcontrols:StepContent x:Name="stepContentControl" Margin="6,6,6,7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" OnFocusedStepChanged="stepContentControl_OnFocusedStepChanged" />
+                    </ScrollViewer>
+                    <Border Grid.Column="1" Width="0.123" HorizontalAlignment="Center" VerticalAlignment="Stretch" >
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0.113"/>
+                                <GradientStop Color="#00000000" Offset="0.954"/>
+                                <GradientStop Color="White"/>
                             </LinearGradientBrush>
-                        </TextBlock.Foreground>
-                        <TextBlock.Effect>
-                            <DropShadowEffect BlurRadius="3" ShadowDepth="1" Opacity="0.1"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
-                </Border>
-                
-                <ScrollViewer Grid.Row="2" Name="pageViewer"  Focusable="False" Padding="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
-            </Grid>
+                        </Border.Background>
+                    </Border>
+                    <Grid Grid.Column="2" Margin="0,10,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border BorderThickness="0,0,0,1" Margin="10,0,0,0" Padding="0,0,0,5" >
+                            <Border.BorderBrush>
+                                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                    <GradientStop Color="#19000000"/>
+                                    <GradientStop Color="#00000000" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <TextBlock Name="headerTextBlock" FontSize="18" FontWeight="Black" Margin="0,0,5,0" >
+                                <TextBlock.Foreground>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FF507ad9" Offset="0"/>
+                                        <GradientStop Color="#FF4167c0" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </TextBlock.Foreground>
+                                <TextBlock.Effect>
+                                    <DropShadowEffect BlurRadius="3" ShadowDepth="1" Opacity="0.1"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+                        </Border>
 
-        </Grid>
-        <StackPanel Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <StackPanel.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#006495ED" Offset="0"/>
-                    <GradientStop Color="#AD6495ED" Offset="1"/>
-                </LinearGradientBrush>
-            </StackPanel.Background>
-        </StackPanel>
-        <StackPanel Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF8F8F8F"/>
-        <StackPanel Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFFFFFFF"/>
-        <localcontrols:DialogButtons x:Name="dialogButtonControl" ButtonSet="Wizard" Grid.Row="6" OnDialogButtonClicked="dialogButtonControl_OnDialogButtonClicked" />
-    </Grid>
+                        <ScrollViewer Grid.Row="2" Name="pageViewer"  Focusable="False" Padding="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
+                    </Grid>
+
+                </Grid>
+                <StackPanel Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <StackPanel.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#006495ED" Offset="0"/>
+                            <GradientStop Color="#AD6495ED" Offset="1"/>
+                        </LinearGradientBrush>
+                    </StackPanel.Background>
+                </StackPanel>
+                <StackPanel Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF8F8F8F"/>
+                <StackPanel Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFFFFFFF"/>
+                <localcontrols:DialogButtons x:Name="dialogButtonControl" ButtonSet="Wizard" Grid.Row="6" OnDialogButtonClicked="dialogButtonControl_OnDialogButtonClicked" />
+            </Grid>
+        </Border>
+    </Border>
+
 </local:WindowBase>

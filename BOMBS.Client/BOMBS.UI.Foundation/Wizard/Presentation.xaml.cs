@@ -74,5 +74,10 @@ namespace BOMBS.UI.Foundation.Wizard
         {
             LoadStep(e.Step);
         }
+
+        private void caption_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove(); 
+        }
     }
 }
