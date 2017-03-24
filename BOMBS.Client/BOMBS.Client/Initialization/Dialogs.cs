@@ -13,9 +13,10 @@ namespace BOMBS.Client.Initialization
         {
             Wizard.Content content = new Wizard.Content();
 
-            content.Steps.Add(new Wizard.Step("Before You Begin", null) { StepInstance = new WelcomePage() });
+            content.Steps.Add(new Wizard.Step("Before You Begin", typeof(WelcomePage)));
             content.Steps.Add(new Wizard.Step("New Administrator", typeof(AdminProfilePage)));
             content.Steps.Add(new Wizard.Step("User Roles", typeof(UserRolesPage)));
+            content.Steps.Add(new Wizard.Step("Initial Users", typeof(UsersPage)));
             content.Steps.Add(new Wizard.Step("Service Mapping", typeof(ServiceMapPage)));
             content.Steps.Add(new Wizard.Step("Summary", typeof(SummaryPage)));
             content.Steps.Add(new Wizard.Step("Confirmation", typeof(ResultsPage)));

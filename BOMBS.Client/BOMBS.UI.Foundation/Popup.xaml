@@ -5,6 +5,9 @@
         xmlns:localcontrols="clr-namespace:BOMBS.UI.Foundation.Controls"
         Title="Popup" MinHeight="320" MinWidth="320" ResizeMode="NoResize" 
         Icon="Resources/bomb.png" Loaded="WindowBase_Loaded" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" >
+    <local:WindowBase.Resources>
+        <FontFamily x:Key="FontAwesome">/Fonts/fontawesome-webfont.ttf#FontAwesome</FontFamily>
+    </local:WindowBase.Resources>
     <Grid Name="layoutGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -34,10 +37,12 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Image Name="imgPopup" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                    <TextBlock Name="txtPopupTitle" Grid.Column="2" Text="Popup Title" Foreground="#FFE6E6E6" FontSize="12" />
+                    <TextBlock Name="txtPopupTitle" Grid.Column="2" Text="Popup Title" Foreground="#FFE6E6E6" FontSize="12" Height="15.96" VerticalAlignment="Top" />
+                    <TextBlock Text="&#xf207;" Grid.Column="3" FontFamily="{StaticResource FontAwesome}" Foreground="#FFE6E6E6" FontSize="12" Height="15.96" VerticalAlignment="Top" />
                 </Grid>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#19000000"  />
                 <StackPanel Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#19FFFFFF"  />

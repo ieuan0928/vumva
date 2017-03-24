@@ -41,6 +41,7 @@ namespace BOMBS.Client.Communicator.Server.Controls
         private void SetRegisteredServersListVeiewSelectedItemToDefault()
         {
             registeredServersListView.SelectedItem = serverCollection.FirstOrDefault(itm => itm.Value.ServerConfigurationStatus != ServerConfigurationStatus.Unset);
+            SetButtonEnable(true);
         }
 
         private void RefreshRegisteredServersView()
@@ -49,6 +50,12 @@ namespace BOMBS.Client.Communicator.Server.Controls
                 registeredServersView = CollectionViewSource.GetDefaultView(registeredServersListView.ItemsSource);
 
             registeredServersView.Refresh();
+        }
+        private void SetButtonEnable(bool isButtonEnable)
+        {
+            addNewServerConnectionConfigurationButton.IsEnabled = isButtonEnable;
+            setToCurrentActiveServerConfigurationButton.IsEnabled = isButtonEnable;
+            testConnectionToRetrieveOrReloadServerConfigurationButton.IsEnabled = isButtonEnable;
         }
 
         private void TestConnection()
@@ -66,6 +73,7 @@ namespace BOMBS.Client.Communicator.Server.Controls
 
         private void addNewServerConnectionConfigurationButton_Click(object sender, RoutedEventArgs e)
         {
+            SetButtonEnable(false);
             if (Server.Dialogs.CreateNewConnection(false))
             {
                 RefreshRegisteredServersView();
@@ -106,16 +114,19 @@ namespace BOMBS.Client.Communicator.Server.Controls
                 RefreshRegisteredServersView();
             }
             else MessageBox.Show("Invalid Connection.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            SetButtonEnable(true);
         }
 
         private void setToCurrentActiveServerConfigurationButton_Click(object sender, RoutedEventArgs e)
         {
+            SetButtonEnable(false);
             isSetToActive = true;
             TestConnection();
         }
 
         private void testConnectionToRetrieveOrReloadServerConfigurationButton_Click(object sender, RoutedEventArgs e)
         {
+            SetButtonEnable(false);
             isSetToActive = false;
             TestConnection();
         }

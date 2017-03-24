@@ -6,10 +6,11 @@ using System.Windows;
 
 using BOMBS.UI.Foundation.Utilities;
 using System.Windows.Threading;
+using MahApps.Metro.Controls;
 
 namespace BOMBS.Client.Communicator
 {
-    public class WindowNotification : Window
+    public class WindowNotification : MetroWindow
     {
         public WindowNotification()
         {

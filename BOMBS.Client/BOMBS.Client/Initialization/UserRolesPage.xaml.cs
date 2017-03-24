@@ -1,4 +1,5 @@
-﻿using BOMBS.UI.Foundation.Wizard.Controls;
+﻿using BOMBS.UI.Foundation.Wizard;
+using BOMBS.UI.Foundation.Wizard.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,20 @@ namespace BOMBS.Client.Initialization
         public UserRolesPage()
         {
             InitializeComponent();
+
+            Header = "Create Possible User Roles";
+        }
+
+        public UserRolesPage(Context Context) : this()
+        {
+            context = Context;
+        }
+
+        private Context context = null;
+
+        public override void LoadState()
+        {
+            base.LoadState();
         }
     }
 }

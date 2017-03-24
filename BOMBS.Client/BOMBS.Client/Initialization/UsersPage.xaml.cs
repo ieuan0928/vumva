@@ -15,13 +15,11 @@ using System.Windows.Shapes;
 
 namespace BOMBS.Client.Initialization
 {
-    public partial class WelcomePage : PageBase
+    public partial class UsersPage : PageBase
     {
-        public WelcomePage()
+        public UsersPage()
         {
             InitializeComponent();
-
-            Header = "Welcome to Initialization Wizard";
         }
     }
 }

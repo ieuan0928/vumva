@@ -25,6 +25,7 @@ using Database = BOMBS.Client.Communicator.Database;
 using BOMBS.UI.Foundation;
 using BOMBS.UI.Foundation.Wizard;
 using BOMBS.Client.Initialization;
+using BOMBS.UI.Foundation.Windows;
 
 namespace BOMBS.Client.Console
 {
@@ -146,8 +147,11 @@ namespace BOMBS.Client.Console
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            Process.Start(Application.ResourceAssembly.Location);
-            Application.Current.Shutdown();
+            //Process.Start(Application.ResourceAssembly.Location);
+            //Application.Current.Shutdown();
+
+            PopWindow window = new PopWindow();
+            window.ShowDialog();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

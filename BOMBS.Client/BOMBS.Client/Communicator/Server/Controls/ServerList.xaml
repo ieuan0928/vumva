@@ -10,6 +10,37 @@
         Height="433.49" Width="538.223">
     <client_communicator:ContentNotification.Resources>
         <communicator_server_controls:ServerConfigurationStatusImageSourceConverter x:Key="ServerConfigurationStatusImageSourceConverter" />
+        <Style x:Key="MyFocusVisualStyle">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="-2" StrokeThickness="1" Stroke="Red"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button" x:Key="TransparentButton">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Background" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="MyContentPresenter" 
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Left" 
+                                          VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.4" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </client_communicator:ContentNotification.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -154,7 +185,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Button x:Name="addNewServerConnectionConfigurationButton" Margin="0,2,0,0" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Left" Click="addNewServerConnectionConfigurationButton_Click">
+                        <Button FocusVisualStyle="{DynamicResource MyFocusVisualStyle}" Style="{StaticResource TransparentButton}" x:Name="addNewServerConnectionConfigurationButton" Click="addNewServerConnectionConfigurationButton_Click">
                             <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -164,7 +195,7 @@
                                 <TextBlock Margin="0,2,5,2" Text="Add New Server Connection Configuration." Grid.Column="1" />
                             </Grid>
                         </Button>
-                        <Button x:Name="setToCurrentActiveServerConfigurationButton" Margin="0,2,0,0" Grid.Row="1" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Left" Click="setToCurrentActiveServerConfigurationButton_Click">
+                        <Button Style="{StaticResource TransparentButton}" x:Name="setToCurrentActiveServerConfigurationButton" Margin="0,2,0,0" Grid.Row="1" Click="setToCurrentActiveServerConfigurationButton_Click">
                             <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -174,7 +205,7 @@
                                 <TextBlock Margin="0,2,5,2" Text="Set to Current Active Server Configuration." Grid.Column="1" />
                             </Grid>
                         </Button>
-                        <Button x:Name="testConnectionToRetrieveOrReloadServerConfigurationButton" Margin="0,2,0,0" Grid.Row="2" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Left" Click="testConnectionToRetrieveOrReloadServerConfigurationButton_Click">
+                        <Button Style="{StaticResource TransparentButton}" x:Name="testConnectionToRetrieveOrReloadServerConfigurationButton" Margin="0,2,0,0" Grid.Row="2" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Left" Click="testConnectionToRetrieveOrReloadServerConfigurationButton_Click">
                             <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />

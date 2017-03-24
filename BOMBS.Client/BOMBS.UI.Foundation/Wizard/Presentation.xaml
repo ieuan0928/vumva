@@ -9,8 +9,8 @@
         xmlns:wizardcontrols="clr-namespace:BOMBS.UI.Foundation.Wizard.Controls"
         Width="640" Height="480" MinWidth="640" MinHeight="480" 
         Icon="/BOMBS.UI.Foundation;component/Resources/bomb.png" 
-        WindowStyle="None" AllowsTransparency="True" Background="Transparent" Padding="20">
-    <Border Padding="3" CornerRadius="3" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gainsboro">
+        Padding="20">
+    <Border Padding="3" Background="WhiteSmoke" BorderBrush="Gainsboro">
         <Border BorderThickness="1" BorderBrush="Gainsboro">
             <Grid Background="White">
                 <Grid.RowDefinitions>
@@ -44,7 +44,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Image Name="imgPopup" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                            <TextBlock Name="txtPopupTitle" Grid.Column="2" Text="Popup Title" Foreground="#FFE6E6E6" FontSize="12" />
+                            <TextBlock Name="txtPopupTitle" Grid.Column="2" Text="Popup Title" Foreground="#FFE6E6E6" FontSize="18" FontWeight="Bold" />
                         </Grid>
                         <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#19000000"  />
                         <StackPanel Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#19FFFFFF"  />
@@ -89,7 +89,7 @@
                                     <GradientStop Color="#00000000" Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.BorderBrush>
-                            <TextBlock Name="headerTextBlock" FontSize="18" FontWeight="Black" Margin="0,0,5,0" >
+                            <TextBlock Name="headerTextBlock" FontSize="16" Margin="0,0,5,0" >
                                 <TextBlock.Foreground>
                                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                                         <GradientStop Color="#FF507ad9" Offset="0"/>
@@ -102,7 +102,7 @@
                             </TextBlock>
                         </Border>
 
-                        <ScrollViewer Grid.Row="2" Name="pageViewer"  Focusable="False" Padding="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
+                        <ScrollViewer Grid.Row="2" Name="pageViewer" Focusable="False" Padding="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" />
                     </Grid>
 
                 </Grid>

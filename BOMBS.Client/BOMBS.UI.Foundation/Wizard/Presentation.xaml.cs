@@ -1,8 +1,10 @@
 ﻿using BOMBS.UI.Foundation.Controls.Dialog;
 using BOMBS.UI.Foundation.Wizard.Controls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,18 +51,36 @@ namespace BOMBS.UI.Foundation.Wizard
             set { wizardContent = value; }
         }
 
+        private PageBase InstantiatePageBase(Type typeOfStep)
+        {
+            PageBase result = null;
+
+            Type[] types = { typeof(Context) };
+            ConstructorInfo constructorInfo = typeOfStep.GetConstructor(types);
+
+            if (ConstructorInfo.Equals(constructorInfo, null)) result = Activator.CreateInstance(typeOfStep) as PageBase;
+            else
+            {
+                result = Activator.CreateInstance(typeOfStep, wizardContent.Context) as PageBase;
+            }
+            return result;
+        }
+
         private void LoadStep(Step stepToLoad)
         {
             if (stepToLoad.StepInstance == null)
-                stepToLoad.StepInstance = Activator.CreateInstance(stepToLoad.TypeOfStep) as PageBase;
+                stepToLoad.StepInstance = InstantiatePageBase(stepToLoad.TypeOfStep);
 
-            string titleToLoad = stepToLoad.StepInstance.Title;
+            string titleToLoad = stepToLoad.StepInstance.Header;
 
             if (string.IsNullOrEmpty(titleToLoad)) headerTextBlock.Text = stepToLoad.Title;
             else if (string.IsNullOrEmpty(titleToLoad.Trim())) headerTextBlock.Text = stepToLoad.Title;
             else headerTextBlock.Text = titleToLoad.Trim();
 
+            txtPopupTitle.Text = stepToLoad.Title;
             pageViewer.Content = stepToLoad.StepInstance;
+            if (stepToLoad.StepInstance.AllowHorizontalScrolling)
+                pageViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
         }
 
         public override void OnApplyTemplate()
@@ -77,7 +97,7 @@ namespace BOMBS.UI.Foundation.Wizard
 
         private void caption_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove(); 
+            //DragMove(); 
         }
     }
 }
